@@ -1,21 +1,24 @@
-import { getAllCompanies, getDemoGeneratedAt } from "@/lib/demo-data";
+import { getAllCompanies, getLatestScanTimestamp } from "@/lib/companies";
 import { LeagueTable } from "@/components/league-table/LeagueTable";
 import { Logo } from "@/components/ui/Logo";
 
-export default function HomePage() {
-  const companies = getAllCompanies();
-  const generatedAt = getDemoGeneratedAt();
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const [companies, generatedAt] = await Promise.all([getAllCompanies(), getLatestScanTimestamp()]);
 
   return (
     <div className="min-h-screen flex flex-col">
       <header className="border-b-[1.5px] border-ink px-6 py-4 flex items-center justify-between">
         <Logo />
         <span className="hard-border rounded-full px-3 py-1 text-xs font-medium bg-white">
-          Last refreshed {new Date(generatedAt).toLocaleDateString("en-GB", {
-            weekday: "short",
-            day: "numeric",
-            month: "short",
-          })}
+          {generatedAt
+            ? `Last refreshed ${new Date(generatedAt).toLocaleDateString("en-GB", {
+                weekday: "short",
+                day: "numeric",
+                month: "short",
+              })}`
+            : "Not yet scanned"}
         </span>
       </header>
 

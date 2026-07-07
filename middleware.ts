@@ -6,7 +6,9 @@ import { SESSION_COOKIE, verifySessionCookie } from "@/lib/auth";
 export const runtime = "nodejs";
 
 export const config = {
-  matcher: ["/((?!api/auth|login|_next/static|_next/image|favicon.ico|mascot|lemfi-logo.png).*)"],
+  // api/cron is excluded because it's called by Vercel Cron with no session
+  // cookie — it authenticates itself via the CRON_SECRET bearer token instead.
+  matcher: ["/((?!api/auth|api/cron|login|_next/static|_next/image|favicon.ico|mascot|lemfi-logo.png).*)"],
 };
 
 export function middleware(req: NextRequest) {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCompanyBySlug } from "@/lib/demo-data";
+import { getCompanyBySlug } from "@/lib/companies";
 import { Logo } from "@/components/ui/Logo";
 import { ScoreBadge } from "@/components/league-table/ScoreBadge";
 import { TrendArrow } from "@/components/league-table/TrendArrow";
@@ -18,13 +18,15 @@ const SECTOR_LABEL: Record<string, string> = {
   other: "Other",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function CompanyDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const company = getCompanyBySlug(slug);
+  const company = await getCompanyBySlug(slug);
   if (!company) notFound();
 
   return (
