@@ -1,6 +1,6 @@
 import { SCORING_WEIGHTS } from "./weights";
 import { DetectedSignal } from "./signal-types";
-import { SubScores } from "@/lib/types";
+import { SignalCategory, SubScores } from "@/lib/types";
 
 export interface CategorySignals {
   layoffs: DetectedSignal | null;
@@ -14,6 +14,8 @@ export interface ScoreResult {
   compositeScore: number | null;
   subScores: SubScores;
   whySummary: string | null;
+  /** The category with the highest weighted contribution, for sourcing-angle generation. Null if no signal at all. */
+  primaryCategory: SignalCategory | null;
 }
 
 function truncate(text: string, max = 140): string {
@@ -34,7 +36,7 @@ export function calculateScore(signals: CategorySignals): ScoreResult {
   const subScores = {} as SubScores;
   let weightedSum = 0;
   let weightTotal = 0;
-  let best: { weightedPoints: number; detail: string } | null = null;
+  let best: { weightedPoints: number; detail: string; category: SignalCategory } | null = null;
 
   for (const category of categories) {
     const signal = signals[category];
@@ -50,12 +52,12 @@ export function calculateScore(signals: CategorySignals): ScoreResult {
 
     const weightedPoints = weight * signal.points;
     if (!best || weightedPoints > best.weightedPoints) {
-      best = { weightedPoints, detail: signal.detail };
+      best = { weightedPoints, detail: signal.detail, category };
     }
   }
 
   const compositeScore = weightTotal > 0 ? Math.round(weightedSum / weightTotal) : null;
   const whySummary = best?.detail ? truncate(best.detail) : null;
 
-  return { compositeScore, subScores, whySummary };
+  return { compositeScore, subScores, whySummary, primaryCategory: best?.category ?? null };
 }

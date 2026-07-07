@@ -14,6 +14,7 @@ import {
 import { detectLeadershipExit } from "@/lib/scoring/leadership-exits";
 import { calculateScore, CategorySignals } from "@/lib/scoring/calculate-score";
 import { DetectedSignal } from "@/lib/scoring/signal-types";
+import { generateSourcingAngle } from "@/lib/sourcing-angle";
 import { AlertCandidate, postThresholdAlerts } from "@/lib/slack";
 import { EventType, SignalCategory, SubScores } from "@/lib/types";
 
@@ -143,6 +144,7 @@ interface ScannedCompany {
   previousScore: number | null;
   priorRank: number | null;
   whySummary: string | null;
+  sourcingAngle: string | null;
   subScores: SubScores;
   events: { category: SignalCategory; signal: DetectedSignal }[];
 }
@@ -178,12 +180,21 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
         };
       }
 
-      const { compositeScore, subScores, whySummary } = calculateScore(signals);
+      const { compositeScore, subScores, whySummary, primaryCategory } = calculateScore(signals);
       const existing = existingBySlug.get(slug);
 
       const events = (Object.keys(signals) as SignalCategory[])
         .map((category) => ({ category, signal: signals[category] }))
         .filter((e): e is { category: SignalCategory; signal: DetectedSignal } => e.signal !== null);
+
+      let sourcingAngle: string | null = null;
+      if (primaryCategory) {
+        try {
+          sourcingAngle = await generateSourcingAngle(company.name, primaryCategory, signals[primaryCategory]!.detail);
+        } catch (err) {
+          console.error(`  Sourcing angle failed for ${company.name}:`, err instanceof Error ? err.message : err);
+        }
+      }
 
       scanned.push({
         slug,
@@ -193,6 +204,7 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
         previousScore: existing?.composite_score ?? null,
         priorRank: existing?.previous_rank ?? null,
         whySummary: compositeScore === null ? "Insufficient data — no signals detected in latest scan" : whySummary,
+        sourcingAngle,
         subScores,
         events,
       });
@@ -215,12 +227,12 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
       INSERT INTO companies (
         slug, name, sector, composite_score, previous_score, previous_rank,
         layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
-        why_summary, last_scanned_at
+        why_summary, sourcing_angle, last_scanned_at
       ) VALUES (
         ${company.slug}, ${company.name}, ${company.sector}, ${company.compositeScore}, ${company.previousScore}, ${rank},
         ${company.subScores.layoffs}, ${company.subScores.leadershipExits}, ${company.subScores.negativePress},
         ${company.subScores.glassdoorTrend}, ${company.subScores.fundingDistress},
-        ${company.whySummary}, now()
+        ${company.whySummary}, ${company.sourcingAngle}, now()
       )
       ON CONFLICT (slug) DO UPDATE SET
         name = EXCLUDED.name,
@@ -234,6 +246,7 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
         glassdoor_score = EXCLUDED.glassdoor_score,
         funding_score = EXCLUDED.funding_score,
         why_summary = EXCLUDED.why_summary,
+        sourcing_angle = EXCLUDED.sourcing_angle,
         last_scanned_at = now(),
         updated_at = now()
       RETURNING id
