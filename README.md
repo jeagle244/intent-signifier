@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LemFi Candidate Intent Platform
 
-## Getting Started
+Internal league table ranking ~173 target companies by "Move Likelihood Score" —
+public signals on layoffs, leadership churn, negative press, Glassdoor sentiment,
+and funding distress — so TA knows which companies to prioritize sourcing from
+this week.
 
-First, run the development server:
+Companion to the `lemfi-competitor-intel` Slack bot: this app ports that bot's
+Claude-web-search signal detection into a standalone scoring pipeline that
+writes to Postgres on a schedule, with a proper league table + detail page UI
+on top instead of a Slack digest.
+
+## Local setup
+
+Requires a Postgres database (local or Neon) and Node 18+.
 
 ```bash
+npm install
+cp .env.local.example .env.local   # fill in real values, see below
+npx tsx scripts/seed-db.ts          # creates tables, inserts the 173 companies
+npx tsx scripts/run-scan.ts --demo  # fixture data, no Anthropic calls — good for UI dev
+# or: npx tsx scripts/run-scan.ts   # real scan, calls the Anthropic API for all 173 companies
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Env vars (see `.env.local.example`):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Var | Purpose |
+|---|---|
+| `ACCESS_PASSWORD` | Shared password recruiters use to log in |
+| `SESSION_SECRET` | Signs the login session cookie — not the password itself |
+| `CRON_SECRET` | Bearer token Vercel Cron sends to `/api/cron/scan` |
+| `ANTHROPIC_API_KEY` | Same key the `lemfi-competitor-intel` bot uses |
+| `SLACK_WEBHOOK_URL` | Incoming webhook for threshold-crossing alerts (optional) |
+| `POSTGRES_URL` | Standard Postgres connection string (local or Neon) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Architecture
 
-## Learn More
+- `app/` — Next.js App Router pages. Server components read pre-computed data
+  from Postgres via `lib/companies.ts` — **never** call the Anthropic API on
+  page render.
+- `lib/scoring/` — signal detection + the weighted composite score. Retune
+  weights in `lib/scoring/weights.ts`.
+- `lib/search/` — Claude + `web_search` tool wrapper, same pattern as the old
+  bot's `searchWeb()`.
+- `scripts/run-scan.ts` — the actual scoring engine. Run manually
+  (`npx tsx scripts/run-scan.ts`) or via `app/api/cron/scan/route.ts`, which
+  Vercel Cron hits on a schedule.
+- `middleware.ts` — password gate via HMAC-signed session cookie.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploying to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this repo to GitHub, import it in Vercel.
+2. Add a Postgres database via the Vercel/Neon integration — this sets
+   `POSTGRES_URL` automatically.
+3. Set the remaining env vars above in the Vercel project settings.
+4. Run `npx tsx scripts/seed-db.ts` once against the production database
+   (e.g. via `vercel env pull` locally, or a one-off script run) to create
+   tables and seed the 173 companies.
+5. Deploy. `vercel.json` registers a **daily** cron hitting `/api/cron/scan`
+   — Hobby tier only allows daily-frequency cron schedules, so the route
+   itself no-ops unless the day is Mon/Wed/Fri (see the comment in
+   `app/api/cron/scan/route.ts`). On Pro, this can be simplified to a literal
+   `0 9 * * 1,3,5` schedule with the day-check removed.
+6. Trigger `/api/cron/scan` manually once with the `CRON_SECRET` bearer token
+   to confirm the full pipeline (search → score → write → Slack alert) before
+   waiting on the schedule.
