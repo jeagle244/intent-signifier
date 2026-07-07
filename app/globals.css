@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --lemfi-lime: #c3f98a;
+  --lemfi-purple: #5a148c;
+  --lemfi-ink: #111111;
+  --lemfi-cream: #f5f1e8;
+  --lemfi-white: #ffffff;
+  --lemfi-gray: #5b5b5b;
+
+  --shadow-hard: 4px 4px 0 var(--lemfi-ink);
+  --shadow-hard-sm: 3px 3px 0 var(--lemfi-ink);
+
+  --background: var(--lemfi-cream);
+  --foreground: var(--lemfi-ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-lime: var(--lemfi-lime);
+  --color-purple: var(--lemfi-purple);
+  --color-ink: var(--lemfi-ink);
+  --color-cream: var(--lemfi-cream);
+  --font-sans: var(--font-lab-grotesque);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-lab-grotesque), -apple-system, system-ui, sans-serif;
+  background-image: radial-gradient(circle, rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.hard-border {
+  border: 1.5px solid var(--lemfi-ink);
+}
+
+.hard-shadow {
+  box-shadow: var(--shadow-hard);
+}
+
+.hard-shadow-sm {
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.eyebrow {
+  color: var(--lemfi-purple);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.highlight-mark {
+  background-image: linear-gradient(var(--lemfi-lime), var(--lemfi-lime));
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 78%;
+  padding: 0 0.05em;
+}

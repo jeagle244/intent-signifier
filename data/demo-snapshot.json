@@ -1,0 +1,158 @@
+{
+  "generatedAt": "2026-07-06T09:00:00.000Z",
+  "companies": [
+    {
+      "slug": "chipper-cash",
+      "name": "Chipper Cash",
+      "sector": "fintech",
+      "compositeScore": 84,
+      "previousScore": 61,
+      "trend": "up",
+      "whySummary": "Laid off ~30% of staff and CTO departed, March 2026",
+      "subScores": { "layoffs": 95, "leadershipExits": 90, "negativePress": 70, "glassdoorTrend": 55, "fundingDistress": 80 },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "Engineering org just absorbed a 30% headcount cut and lost its CTO in the same quarter — remaining staff are likely covering wider scope with less certainty about leadership direction. Good moment to pitch LemFi's stability and clear ownership structure.",
+      "events": [
+        { "id": 1, "eventType": "layoff", "eventDate": "2026-03-14", "description": "Chipper Cash lays off approximately 30% of remaining staff amid continued restructuring.", "sourceUrl": "https://techcrunch.com/example-chipper-layoffs", "pointsContributed": 26 },
+        { "id": 2, "eventType": "leadership_exit", "eventDate": "2026-03-02", "description": "CTO departs Chipper Cash after 4 years, no replacement named.", "sourceUrl": "https://techcrunch.com/example-chipper-cto", "pointsContributed": 18 },
+        { "id": 3, "eventType": "funding_distress", "eventDate": "2026-02-20", "description": "Reports of a bridge round at a reduced valuation following delayed Series D close.", "sourceUrl": "https://theblock.co/example-chipper-bridge", "pointsContributed": 12 }
+      ]
+    },
+    {
+      "slug": "n26",
+      "name": "N26",
+      "sector": "bank",
+      "compositeScore": 71,
+      "previousScore": 72,
+      "trend": "flat",
+      "whySummary": "Hiring freeze reported, missed European expansion targets",
+      "subScores": { "layoffs": null, "leadershipExits": 40, "negativePress": 60, "glassdoorTrend": 65, "fundingDistress": 55 },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "No confirmed layoffs, but a hiring freeze plus missed expansion targets suggests internal pressure on delivery teams. Frame outreach around scope and ownership rather than instability.",
+      "events": [
+        { "id": 4, "eventType": "negative_press", "eventDate": "2026-06-01", "description": "N26 misses European expansion targets for second consecutive quarter.", "sourceUrl": "https://ft.com/example-n26-targets", "pointsContributed": 12 },
+        { "id": 5, "eventType": "funding_distress", "eventDate": "2026-05-18", "description": "Internal memo reportedly announces hiring freeze to focus on profitability.", "sourceUrl": "https://finextra.com/example-n26-freeze", "pointsContributed": 8 },
+        { "id": 6, "eventType": "leadership_exit", "eventDate": "2026-04-22", "description": "VP of Product exits N26 for a role at a competitor.", "sourceUrl": "https://linkedin.com/example-n26-vp", "pointsContributed": 8 }
+      ]
+    },
+    {
+      "slug": "klarna",
+      "name": "Klarna",
+      "sector": "bnpl",
+      "compositeScore": 68,
+      "previousScore": 45,
+      "trend": "up",
+      "whySummary": "Laid off 700 employees, ~10% of workforce, June 2026",
+      "subScores": { "layoffs": 90, "leadershipExits": null, "negativePress": 40, "glassdoorTrend": 50, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "A 10% workforce reduction this recently means displaced engineers and designers are actively job-hunting right now, before they land elsewhere. Move fast on this one.",
+      "events": [
+        { "id": 7, "eventType": "layoff", "eventDate": "2026-06-10", "description": "Klarna lays off 700 employees, roughly 10% of workforce, citing AI-driven efficiency gains.", "sourceUrl": "https://bloomberg.com/example-klarna-layoffs", "pointsContributed": 27 },
+        { "id": 8, "eventType": "glassdoor", "eventDate": "2026-06-15", "description": "Glassdoor rating drops from 3.9 to 3.4 following layoff announcement, review volume up sharply.", "sourceUrl": "https://glassdoor.com/example-klarna", "pointsContributed": 7.5 }
+      ]
+    },
+    {
+      "slug": "brex",
+      "name": "Brex",
+      "sector": "fintech",
+      "compositeScore": 52,
+      "previousScore": 38,
+      "trend": "up",
+      "whySummary": "SMB product team dissolved following strategic pivot",
+      "subScores": { "layoffs": 65, "leadershipExits": null, "negativePress": null, "glassdoorTrend": 45, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "The SMB product team was dissolved outright rather than resized — those PMs and designers have no team to return to internally, making them unusually receptive to outbound right now.",
+      "events": [
+        { "id": 9, "eventType": "layoff", "eventDate": "2026-05-28", "description": "Brex lays off 150 staff as it pivots away from the SMB market toward enterprise.", "sourceUrl": "https://techcrunch.com/example-brex-layoffs", "pointsContributed": 17 },
+        { "id": 10, "eventType": "glassdoor", "eventDate": "2026-06-02", "description": "Employee reviews cite uncertainty about team restructuring and unclear reporting lines.", "sourceUrl": "https://glassdoor.com/example-brex", "pointsContributed": 6.75 }
+      ]
+    },
+    {
+      "slug": "revolut",
+      "name": "Revolut",
+      "sector": "fintech",
+      "compositeScore": 22,
+      "previousScore": 25,
+      "trend": "down",
+      "whySummary": "Minor cultural complaints only, no major signals",
+      "subScores": { "layoffs": null, "leadershipExits": null, "negativePress": 25, "glassdoorTrend": 30, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "Signal is weak here — this is a low-priority week for Revolut, worth revisiting after the next scan rather than leading outreach with any specific hook.",
+      "events": [
+        { "id": 11, "eventType": "negative_press", "eventDate": "2026-06-20", "description": "Minor regulatory scrutiny reported in one European market, no material impact disclosed.", "sourceUrl": "https://reuters.com/example-revolut-reg", "pointsContributed": 5 }
+      ]
+    },
+    {
+      "slug": "wise",
+      "name": "Wise",
+      "sector": "remittance",
+      "compositeScore": null,
+      "previousScore": null,
+      "trend": "new",
+      "whySummary": "Insufficient data — no signals detected in latest scan",
+      "subScores": { "layoffs": null, "leadershipExits": null, "negativePress": null, "glassdoorTrend": null, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": null,
+      "events": []
+    },
+    {
+      "slug": "monzo",
+      "name": "Monzo",
+      "sector": "bank",
+      "compositeScore": 34,
+      "previousScore": 20,
+      "trend": "up",
+      "whySummary": "Head of Engineering departs, no layoffs detected",
+      "subScores": { "layoffs": null, "leadershipExits": 60, "negativePress": null, "glassdoorTrend": null, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "A senior engineering leadership exit without any accompanying layoff signal often means the org is mid-reshuffle — worth a light-touch check-in with ICs on that team.",
+      "events": [
+        { "id": 12, "eventType": "leadership_exit", "eventDate": "2026-06-25", "description": "Head of Engineering departs Monzo for an external opportunity, internal backfill not yet announced.", "sourceUrl": "https://linkedin.com/example-monzo-head-eng", "pointsContributed": 12 }
+      ]
+    },
+    {
+      "slug": "flutterwave",
+      "name": "Flutterwave",
+      "sector": "payments",
+      "compositeScore": 58,
+      "previousScore": 58,
+      "trend": "flat",
+      "whySummary": "Regulatory challenges reported across multiple African markets",
+      "subScores": { "layoffs": null, "leadershipExits": null, "negativePress": 75, "glassdoorTrend": 40, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "Regulatory pressure across several markets is creating uncertainty without an accompanying headcount cut — likely to unsettle compliance and risk teams specifically.",
+      "events": [
+        { "id": 13, "eventType": "negative_press", "eventDate": "2026-05-30", "description": "Flutterwave faces regulatory challenges in multiple African markets over licensing compliance.", "sourceUrl": "https://reuters.com/example-flutterwave-reg", "pointsContributed": 15 }
+      ]
+    },
+    {
+      "slug": "stripe",
+      "name": "Stripe",
+      "sector": "payments",
+      "compositeScore": 12,
+      "previousScore": 12,
+      "trend": "flat",
+      "whySummary": "No material signals detected",
+      "subScores": { "layoffs": null, "leadershipExits": null, "negativePress": 15, "glassdoorTrend": null, "fundingDistress": null },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "Nothing actionable this week.",
+      "events": []
+    },
+    {
+      "slug": "zilch",
+      "name": "Zilch",
+      "sector": "bnpl",
+      "compositeScore": 46,
+      "previousScore": 30,
+      "trend": "up",
+      "whySummary": "Glassdoor rating declining, funding round delayed",
+      "subScores": { "layoffs": null, "leadershipExits": null, "negativePress": null, "glassdoorTrend": 70, "fundingDistress": 60 },
+      "lastScannedAt": "2026-07-05T09:00:00.000Z",
+      "sourcingAngle": "Declining internal sentiment plus a stalled funding round is a classic pre-layoff pattern — worth building relationships now, ahead of any public announcement.",
+      "events": [
+        { "id": 14, "eventType": "funding_distress", "eventDate": "2026-06-12", "description": "Reports suggest Zilch's next funding round has been delayed amid investor caution in BNPL sector.", "sourceUrl": "https://sifted.eu/example-zilch-funding", "pointsContributed": 9 },
+        { "id": 15, "eventType": "glassdoor", "eventDate": "2026-06-18", "description": "Glassdoor reviews increasingly cite concerns about job security and leadership communication.", "sourceUrl": "https://glassdoor.com/example-zilch", "pointsContributed": 10.5 }
+      ]
+    }
+  ]
+}
