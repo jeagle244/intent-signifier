@@ -1,6 +1,3 @@
-import { config } from "dotenv";
-config({ path: ".env.local" });
-config();
 import { readFileSync } from "fs";
 import { join } from "path";
 import { sql } from "@/lib/db";
@@ -21,7 +18,7 @@ async function applySchema() {
   for (const statement of statements) {
     await sql.query(statement);
   }
-  console.log(`[seed-db] Applied schema (${statements.length} statements).`);
+  return statements.length;
 }
 
 async function seedCompanies() {
@@ -37,17 +34,33 @@ async function seedCompanies() {
     );
     if (Array.isArray(result) && result.length > 0) inserted++;
   }
-  console.log(`[seed-db] Inserted ${inserted} new companies (${SEED_COMPANIES.length} total in seed list).`);
+  return inserted;
 }
 
-async function main() {
-  await applySchema();
-  await seedCompanies();
+export async function seedDatabase() {
+  const statementCount = await applySchema();
+  const inserted = await seedCompanies();
+  return { statementCount, inserted, total: SEED_COMPANIES.length };
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("[seed-db] Failed:", err);
-    process.exit(1);
-  });
+if (require.main === module) {
+  // CLI entry — loads .env.local for local dev, since production seeding
+  // goes through app/api/cron/seed/route.ts instead (Vercel's "Sensitive"
+  // env vars, like POSTGRES_URL here, aren't readable outside the deployed
+  // runtime, so `vercel env pull` can't get a usable value for this script).
+  (async () => {
+    const { config } = await import("dotenv");
+    config({ path: ".env.local" });
+    config();
+
+    try {
+      const { statementCount, inserted, total } = await seedDatabase();
+      console.log(`[seed-db] Applied schema (${statementCount} statements).`);
+      console.log(`[seed-db] Inserted ${inserted} new companies (${total} total in seed list).`);
+      process.exit(0);
+    } catch (err) {
+      console.error("[seed-db] Failed:", err);
+      process.exit(1);
+    }
+  })();
+}
