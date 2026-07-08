@@ -12,7 +12,15 @@ export interface AlertCandidate {
 }
 
 function isNewTopN(c: AlertCandidate): boolean {
-  return c.rank <= ALERT_CONFIG.topNThreshold && (c.priorRank === null || c.priorRank > ALERT_CONFIG.topNThreshold);
+  // Rank alone isn't meaningful for a company with no detected signal —
+  // null-score companies are arbitrarily ordered relative to each other,
+  // so without this check one could "enter the top 10" on pure tie-break
+  // noise between runs.
+  return (
+    c.compositeScore !== null &&
+    c.rank <= ALERT_CONFIG.topNThreshold &&
+    (c.priorRank === null || c.priorRank > ALERT_CONFIG.topNThreshold)
+  );
 }
 
 function isScoreJump(c: AlertCandidate): boolean {

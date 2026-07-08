@@ -16,10 +16,15 @@ import { calculateScore, CategorySignals } from "@/lib/scoring/calculate-score";
 import { DetectedSignal } from "@/lib/scoring/signal-types";
 import { generateSourcingAngle } from "@/lib/sourcing-angle";
 import { AlertCandidate, postThresholdAlerts } from "@/lib/slack";
-import { EventType, SignalCategory, SubScores } from "@/lib/types";
+import { EventType, SignalCategory } from "@/lib/types";
 
-const BATCH_SIZE = 10;
-const BATCH_DELAY_MS = 2000;
+// Concurrency, not just batching: 173 companies x 5 sequential category
+// searches each, fully serial, was estimated at 40-50+ minutes — far past
+// any realistic Vercel function timeout. Running companies concurrently
+// (each company's own 5 categories still run sequentially within it) cuts
+// wall-clock time by roughly this factor, without changing per-company logic.
+const CONCURRENCY = 8;
+const CHUNK_DELAY_MS = 1000;
 const QUERY_DELAY_MS = 500;
 
 const EVENT_TYPE_BY_CATEGORY: Record<SignalCategory, EventType> = {
@@ -136,17 +141,101 @@ interface ExistingCompanyRow {
   previous_rank: number | null;
 }
 
-interface ScannedCompany {
+interface RankableCompanyRow {
   slug: string;
   name: string;
   sector: string;
-  compositeScore: number | null;
-  previousScore: number | null;
-  priorRank: number | null;
-  whySummary: string | null;
-  sourcingAngle: string | null;
-  subScores: SubScores;
-  events: { category: SignalCategory; signal: DetectedSignal }[];
+  composite_score: number | null;
+  previous_score: number | null;
+  previous_rank: number | null;
+  why_summary: string | null;
+}
+
+/**
+ * Scans one company AND writes its result immediately — deliberately not
+ * batched into a single end-of-run write. Vercel functions can time out
+ * mid-scan; writing per-company means whatever's already been scanned by
+ * that point is saved (and its API cost wasn't wasted), rather than an
+ * all-or-nothing write at the end that a timeout would wipe out entirely.
+ */
+async function scanAndWriteCompany(
+  company: (typeof SEED_COMPANIES)[number],
+  demo: boolean,
+  existingBySlug: Map<string, ExistingCompanyRow>
+) {
+  const slug = slugify(company.name);
+  console.log(`  Scanning: ${company.name}`);
+
+  let signals: CategorySignals;
+  try {
+    signals = demo ? scanCompanyDemo(slug) : await scanCompanyReal(company.name);
+  } catch (err) {
+    console.error(`  Error scanning ${company.name}:`, err instanceof Error ? err.message : err);
+    signals = {
+      layoffs: null,
+      leadershipExits: null,
+      negativePress: null,
+      glassdoorTrend: null,
+      fundingDistress: null,
+    };
+  }
+
+  const { compositeScore, subScores, whySummary, primaryCategory } = calculateScore(signals);
+  const existing = existingBySlug.get(slug);
+  const previousScore = existing?.composite_score ?? null;
+  const finalWhySummary = compositeScore === null ? "Insufficient data — no signals detected in latest scan" : whySummary;
+
+  const events = (Object.keys(signals) as SignalCategory[])
+    .map((category) => ({ category, signal: signals[category] }))
+    .filter((e): e is { category: SignalCategory; signal: DetectedSignal } => e.signal !== null);
+
+  let sourcingAngle: string | null = null;
+  if (primaryCategory) {
+    try {
+      sourcingAngle = await generateSourcingAngle(company.name, primaryCategory, signals[primaryCategory]!.detail);
+    } catch (err) {
+      console.error(`  Sourcing angle failed for ${company.name}:`, err instanceof Error ? err.message : err);
+    }
+  }
+
+  const result = await sql`
+    INSERT INTO companies (
+      slug, name, sector, composite_score, previous_score,
+      layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
+      why_summary, sourcing_angle, last_scanned_at
+    ) VALUES (
+      ${slug}, ${company.name}, ${company.sector}, ${compositeScore}, ${previousScore},
+      ${subScores.layoffs}, ${subScores.leadershipExits}, ${subScores.negativePress},
+      ${subScores.glassdoorTrend}, ${subScores.fundingDistress},
+      ${finalWhySummary}, ${sourcingAngle}, now()
+    )
+    ON CONFLICT (slug) DO UPDATE SET
+      name = EXCLUDED.name,
+      sector = EXCLUDED.sector,
+      composite_score = EXCLUDED.composite_score,
+      previous_score = EXCLUDED.previous_score,
+      layoff_score = EXCLUDED.layoff_score,
+      leadership_exit_score = EXCLUDED.leadership_exit_score,
+      press_score = EXCLUDED.press_score,
+      glassdoor_score = EXCLUDED.glassdoor_score,
+      funding_score = EXCLUDED.funding_score,
+      why_summary = EXCLUDED.why_summary,
+      sourcing_angle = EXCLUDED.sourcing_angle,
+      last_scanned_at = now(),
+      updated_at = now()
+    RETURNING id
+  `;
+  const companyId = (result as unknown as { id: number }[])[0].id;
+
+  for (const { category, signal } of events) {
+    await sql`
+      INSERT INTO events (company_id, event_type, event_date, description, source_url, points_contributed)
+      VALUES (${companyId}, ${EVENT_TYPE_BY_CATEGORY[category]}, ${signal.eventDate}, ${signal.detail}, ${signal.sourceUrl}, ${signal.points})
+      ON CONFLICT (company_id, event_type, event_date) WHERE event_date IS NOT NULL DO NOTHING
+    `;
+  }
+
+  return { slug, compositeScore };
 }
 
 export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseUrl?: string } = {}) {
@@ -155,121 +244,49 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
   const existingRows = (await sql`SELECT slug, composite_score, previous_rank FROM companies`) as unknown as ExistingCompanyRow[];
   const existingBySlug = new Map(existingRows.map((r) => [r.slug, r]));
 
-  const scanned: ScannedCompany[] = [];
-  const batches: (typeof SEED_COMPANIES)[] = [];
-  for (let i = 0; i < SEED_COMPANIES.length; i += BATCH_SIZE) {
-    batches.push(SEED_COMPANIES.slice(i, i + BATCH_SIZE));
+  const results: { slug: string; compositeScore: number | null }[] = [];
+  for (let i = 0; i < SEED_COMPANIES.length; i += CONCURRENCY) {
+    const chunk = SEED_COMPANIES.slice(i, i + CONCURRENCY);
+    const chunkResults = await Promise.all(
+      chunk.map((company) =>
+        scanAndWriteCompany(company, demo, existingBySlug).catch((err) => {
+          console.error(`  Failed to scan/write ${company.name}:`, err instanceof Error ? err.message : err);
+          return null;
+        })
+      )
+    );
+    results.push(...chunkResults.filter((r): r is NonNullable<typeof r> => r !== null));
+
+    if (!demo && i + CONCURRENCY < SEED_COMPANIES.length) await delay(CHUNK_DELAY_MS);
   }
 
-  for (const batch of batches) {
-    for (const company of batch) {
-      const slug = slugify(company.name);
-      console.log(`  Scanning: ${company.name}`);
+  console.log(`[run-scan] Scanned & wrote ${results.length}/${SEED_COMPANIES.length} companies.`);
 
-      let signals: CategorySignals;
-      try {
-        signals = demo ? scanCompanyDemo(slug) : await scanCompanyReal(company.name);
-      } catch (err) {
-        console.error(`  Error scanning ${company.name}:`, err instanceof Error ? err.message : err);
-        signals = {
-          layoffs: null,
-          leadershipExits: null,
-          negativePress: null,
-          glassdoorTrend: null,
-          fundingDistress: null,
-        };
-      }
-
-      const { compositeScore, subScores, whySummary, primaryCategory } = calculateScore(signals);
-      const existing = existingBySlug.get(slug);
-
-      const events = (Object.keys(signals) as SignalCategory[])
-        .map((category) => ({ category, signal: signals[category] }))
-        .filter((e): e is { category: SignalCategory; signal: DetectedSignal } => e.signal !== null);
-
-      let sourcingAngle: string | null = null;
-      if (primaryCategory) {
-        try {
-          sourcingAngle = await generateSourcingAngle(company.name, primaryCategory, signals[primaryCategory]!.detail);
-        } catch (err) {
-          console.error(`  Sourcing angle failed for ${company.name}:`, err instanceof Error ? err.message : err);
-        }
-      }
-
-      scanned.push({
-        slug,
-        name: company.name,
-        sector: company.sector,
-        compositeScore,
-        previousScore: existing?.composite_score ?? null,
-        priorRank: existing?.previous_rank ?? null,
-        whySummary: compositeScore === null ? "Insufficient data — no signals detected in latest scan" : whySummary,
-        sourcingAngle,
-        subScores,
-        events,
-      });
-
-      if (!demo) await delay(BATCH_DELAY_MS);
-    }
-  }
-
-  // Rank now, so this run's rank can be stored as next run's "prior rank".
-  const ranked = [...scanned].sort((a, b) => (b.compositeScore ?? -1) - (a.compositeScore ?? -1));
-  const rankBySlug = new Map(ranked.map((c, i) => [c.slug, i + 1]));
-
+  // Fast pass, no external API calls left — safe even if the scan above
+  // got cut short by a timeout, since it only touches whatever's currently
+  // in the DB rather than depending on `results` covering everyone.
   const generatedAt = new Date().toISOString();
+  const allRows = (await sql`
+    SELECT slug, name, sector, composite_score, previous_score, previous_rank, why_summary
+    FROM companies
+  `) as unknown as RankableCompanyRow[];
+
+  const ranked = [...allRows].sort((a, b) => (b.composite_score ?? -1) - (a.composite_score ?? -1));
   const alertCandidates: AlertCandidate[] = [];
 
-  for (const company of scanned) {
-    const rank = rankBySlug.get(company.slug)!;
-
-    const result = await sql`
-      INSERT INTO companies (
-        slug, name, sector, composite_score, previous_score, previous_rank,
-        layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
-        why_summary, sourcing_angle, last_scanned_at
-      ) VALUES (
-        ${company.slug}, ${company.name}, ${company.sector}, ${company.compositeScore}, ${company.previousScore}, ${rank},
-        ${company.subScores.layoffs}, ${company.subScores.leadershipExits}, ${company.subScores.negativePress},
-        ${company.subScores.glassdoorTrend}, ${company.subScores.fundingDistress},
-        ${company.whySummary}, ${company.sourcingAngle}, now()
-      )
-      ON CONFLICT (slug) DO UPDATE SET
-        name = EXCLUDED.name,
-        sector = EXCLUDED.sector,
-        composite_score = EXCLUDED.composite_score,
-        previous_score = EXCLUDED.previous_score,
-        previous_rank = EXCLUDED.previous_rank,
-        layoff_score = EXCLUDED.layoff_score,
-        leadership_exit_score = EXCLUDED.leadership_exit_score,
-        press_score = EXCLUDED.press_score,
-        glassdoor_score = EXCLUDED.glassdoor_score,
-        funding_score = EXCLUDED.funding_score,
-        why_summary = EXCLUDED.why_summary,
-        sourcing_angle = EXCLUDED.sourcing_angle,
-        last_scanned_at = now(),
-        updated_at = now()
-      RETURNING id
-    `;
-    const companyId = (result as unknown as { id: number }[])[0].id;
-
-    for (const { category, signal } of company.events) {
-      await sql`
-        INSERT INTO events (company_id, event_type, event_date, description, source_url, points_contributed)
-        VALUES (${companyId}, ${EVENT_TYPE_BY_CATEGORY[category]}, ${signal.eventDate}, ${signal.detail}, ${signal.sourceUrl}, ${signal.points})
-        ON CONFLICT (company_id, event_type, event_date) WHERE event_date IS NOT NULL DO NOTHING
-      `;
-    }
-
+  for (let i = 0; i < ranked.length; i++) {
+    const row = ranked[i];
+    const rank = i + 1;
+    await sql`UPDATE companies SET previous_rank = ${rank} WHERE slug = ${row.slug}`;
     alertCandidates.push({
-      slug: company.slug,
-      name: company.name,
-      sector: company.sector,
-      compositeScore: company.compositeScore,
-      previousScore: company.previousScore,
+      slug: row.slug,
+      name: row.name,
+      sector: row.sector,
+      compositeScore: row.composite_score,
+      previousScore: row.previous_score,
       rank,
-      priorRank: company.priorRank,
-      whySummary: company.whySummary,
+      priorRank: row.previous_rank,
+      whySummary: row.why_summary,
     });
   }
 
@@ -279,10 +296,10 @@ export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseU
   });
 
   console.log(
-    `[run-scan] Complete. ${scanned.filter((c) => c.compositeScore !== null).length}/${scanned.length} companies scored.`
+    `[run-scan] Complete. ${results.filter((c) => c.compositeScore !== null).length}/${results.length} companies scored this run.`
   );
 
-  return { generatedAt, scannedCount: scanned.length, alertResult };
+  return { generatedAt, scannedCount: results.length, alertResult };
 }
 
 if (require.main === module) {

@@ -7,6 +7,12 @@ import { NextRequest, NextResponse } from "next/server";
 // a literal "0 9 * * 1,3,5" instead.
 const SCAN_DAYS_UTC = [1, 3, 5];
 
+// Max allowed on Hobby (Fluid Compute). Scanning all ~173 companies with
+// concurrency 8 still may not finish inside this — run-scan.ts writes each
+// company to the DB as soon as it's scored specifically so a timeout here
+// only means "fewer companies got scanned this run," not "nothing saved."
+export const maxDuration = 300;
+
 export async function GET(req: NextRequest) {
   const auth = req.headers.get("authorization");
   if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
