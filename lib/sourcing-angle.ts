@@ -29,11 +29,16 @@ function fallbackAngle(companyName: string, category: SignalCategory): string {
  * reframed from a copy-paste InMail line to an internal recruiter note:
  * this tool's "sourcing angle" is what a recruiter reads before deciding
  * where to spend a week's sourcing effort, not something sent verbatim.
+ *
+ * Tier/category context lets the note reason about both dimensions the
+ * league table ranks on (e.g. "Tier A priority target AND showing
+ * layoffs" is a stronger signal than the layoff alone).
  */
 export async function generateSourcingAngle(
   companyName: string,
   primaryCategory: SignalCategory,
-  primaryDetail: string
+  primaryDetail: string,
+  relevanceContext: { tier: string; category: string }
 ): Promise<string> {
   if (!process.env.ANTHROPIC_API_KEY) {
     return fallbackAngle(companyName, primaryCategory);
@@ -41,10 +46,11 @@ export async function generateSourcingAngle(
 
   const prompt = `You are briefing an internal recruiter at LemFi (cross-border fintech, diaspora-focused, operating in 20+ countries) on why now might be a good moment to source candidates from ${companyName}.
 
+Company relevance: ${relevanceContext.tier} target, category: ${relevanceContext.category}
 Signal detected: ${CATEGORY_LABEL[primaryCategory]}
 Evidence: ${primaryDetail}
 
-Write a 1-2 sentence internal note suggesting what a recruiter could reference in outreach given this signal (e.g. team morale, scope changes, stability concerns). This is for internal use, not a message sent to a candidate — do not write it as an InMail. Be specific and grounded in the evidence, not generic. Output only the note, no preamble.`;
+Write a 1-2 sentence internal note suggesting what a recruiter could reference in outreach given this signal (e.g. team morale, scope changes, stability concerns). Where relevant, briefly note why this company is strategically worth prioritizing given its relevance tier, not just the immediate signal. This is for internal use, not a message sent to a candidate — do not write it as an InMail. Be specific and grounded in the evidence, not generic. Output only the note, no preamble.`;
 
   try {
     const message = await getClient().messages.create({

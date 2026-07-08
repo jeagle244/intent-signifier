@@ -2,7 +2,6 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 import { sql } from "@/lib/db";
-import { SEED_COMPANIES, slugify } from "@/lib/seed-companies";
 import { buildSearchQueries } from "@/lib/search/queries";
 import { searchWeb, delay } from "@/lib/search/web-search";
 import {
@@ -15,14 +14,15 @@ import { detectLeadershipExit } from "@/lib/scoring/leadership-exits";
 import { calculateScore, CategorySignals } from "@/lib/scoring/calculate-score";
 import { DetectedSignal } from "@/lib/scoring/signal-types";
 import { generateSourcingAngle } from "@/lib/sourcing-angle";
+import { computePriorityScore } from "@/lib/priority";
 import { AlertCandidate, postThresholdAlerts } from "@/lib/slack";
 import { EventType, SignalCategory } from "@/lib/types";
 
-// Concurrency, not just batching: 173 companies x 5 sequential category
-// searches each, fully serial, was estimated at 40-50+ minutes — far past
-// any realistic Vercel function timeout. Running companies concurrently
-// (each company's own 5 categories still run sequentially within it) cuts
-// wall-clock time by roughly this factor, without changing per-company logic.
+// Concurrency, not just batching: scanning companies fully serial (5
+// sequential category searches each) was estimated at 40-50+ minutes for
+// just 173 of them — far past any realistic Vercel function timeout.
+// Running companies concurrently (each company's own 5 categories still
+// run sequentially within it) cuts wall-clock time by roughly this factor.
 const CONCURRENCY = 8;
 const CHUNK_DELAY_MS = 1000;
 const QUERY_DELAY_MS = 500;
@@ -63,27 +63,10 @@ async function scanCompanyReal(name: string): Promise<CategorySignals> {
 // Fixture signals for a handful of companies so `--demo` exercises every
 // code path (mixed signals, insufficient data, high/low scores) without
 // calling Anthropic. Mirrors the old bot's generateDemoSnapshot() pattern.
+// Chipper Cash and Flutterwave aren't in the new 364-company list — Klarna/
+// Monzo/Revolut are all Tier A (active_scan), "alma" is Tier C (inactive,
+// so it should never appear in scan results even though it's listed here).
 const DEMO_SIGNAL_OVERRIDES: Record<string, Partial<CategorySignals>> = {
-  chipper: {
-    layoffs: {
-      points: 95,
-      detail: "Chipper Cash lays off approximately 30% of remaining staff amid continued restructuring.",
-      sourceUrl: "https://techcrunch.com/example-chipper-layoffs",
-      eventDate: "2026-03-14",
-    },
-    leadershipExits: {
-      points: 90,
-      detail: "CTO departs Chipper Cash after 4 years, no replacement named.",
-      sourceUrl: "https://techcrunch.com/example-chipper-cto",
-      eventDate: "2026-03-02",
-    },
-    fundingDistress: {
-      points: 80,
-      detail: "Reports of a bridge round at a reduced valuation following a delayed Series D close.",
-      sourceUrl: "https://theblock.co/example-chipper-bridge",
-      eventDate: "2026-02-20",
-    },
-  },
   klarna: {
     layoffs: {
       points: 90,
@@ -106,20 +89,20 @@ const DEMO_SIGNAL_OVERRIDES: Record<string, Partial<CategorySignals>> = {
       eventDate: "2026-06-25",
     },
   },
-  flutterwave: {
-    negativePress: {
-      points: 80,
-      detail: "Flutterwave faces regulatory challenges in multiple African markets over licensing compliance.",
-      sourceUrl: "https://reuters.com/example-flutterwave-reg",
-      eventDate: "2026-05-30",
-    },
-  },
   revolut: {
     negativePress: {
       points: 60,
       detail: "Minor regulatory scrutiny reported in one European market, no material impact disclosed.",
       sourceUrl: "https://reuters.com/example-revolut-reg",
       eventDate: "2026-06-20",
+    },
+  },
+  alma: {
+    layoffs: {
+      points: 95,
+      detail: "This should never appear — Alma is Tier C and excluded from active_scan.",
+      sourceUrl: null,
+      eventDate: null,
     },
   },
 };
@@ -135,10 +118,14 @@ function scanCompanyDemo(slug: string): CategorySignals {
   };
 }
 
-interface ExistingCompanyRow {
+interface ScanCandidateRow {
   slug: string;
+  name: string;
+  tier: string;
+  category: string;
+  lemfi_relevance_score: number;
+  competitive_notes: string | null;
   composite_score: number | null;
-  previous_rank: number | null;
 }
 
 interface RankableCompanyRow {
@@ -149,6 +136,12 @@ interface RankableCompanyRow {
   previous_score: number | null;
   previous_rank: number | null;
   why_summary: string | null;
+  priority_score: number | null;
+}
+
+function tierAwareWhySummary(tier: string, category: string, competitiveNotes: string | null): string {
+  if (competitiveNotes) return `${tier} target (${category}). ${competitiveNotes}`;
+  return `${tier} target (${category}) — no active signal detected this week`;
 }
 
 /**
@@ -158,19 +151,14 @@ interface RankableCompanyRow {
  * that point is saved (and its API cost wasn't wasted), rather than an
  * all-or-nothing write at the end that a timeout would wipe out entirely.
  */
-async function scanAndWriteCompany(
-  company: (typeof SEED_COMPANIES)[number],
-  demo: boolean,
-  existingBySlug: Map<string, ExistingCompanyRow>
-) {
-  const slug = slugify(company.name);
-  console.log(`  Scanning: ${company.name}`);
+async function scanAndWriteCompany(candidate: ScanCandidateRow, demo: boolean) {
+  console.log(`  Scanning: ${candidate.name}`);
 
   let signals: CategorySignals;
   try {
-    signals = demo ? scanCompanyDemo(slug) : await scanCompanyReal(company.name);
+    signals = demo ? scanCompanyDemo(candidate.slug) : await scanCompanyReal(candidate.name);
   } catch (err) {
-    console.error(`  Error scanning ${company.name}:`, err instanceof Error ? err.message : err);
+    console.error(`  Error scanning ${candidate.name}:`, err instanceof Error ? err.message : err);
     signals = {
       layoffs: null,
       leadershipExits: null,
@@ -181,9 +169,12 @@ async function scanAndWriteCompany(
   }
 
   const { compositeScore, subScores, whySummary, primaryCategory } = calculateScore(signals);
-  const existing = existingBySlug.get(slug);
-  const previousScore = existing?.composite_score ?? null;
-  const finalWhySummary = compositeScore === null ? "Insufficient data — no signals detected in latest scan" : whySummary;
+  const previousScore = candidate.composite_score;
+  const finalWhySummary =
+    compositeScore === null
+      ? tierAwareWhySummary(candidate.tier, candidate.category, candidate.competitive_notes)
+      : whySummary;
+  const priorityScore = computePriorityScore(candidate.lemfi_relevance_score, compositeScore);
 
   const events = (Object.keys(signals) as SignalCategory[])
     .map((category) => ({ category, signal: signals[category] }))
@@ -192,37 +183,30 @@ async function scanAndWriteCompany(
   let sourcingAngle: string | null = null;
   if (primaryCategory) {
     try {
-      sourcingAngle = await generateSourcingAngle(company.name, primaryCategory, signals[primaryCategory]!.detail);
+      sourcingAngle = await generateSourcingAngle(candidate.name, primaryCategory, signals[primaryCategory]!.detail, {
+        tier: candidate.tier,
+        category: candidate.category,
+      });
     } catch (err) {
-      console.error(`  Sourcing angle failed for ${company.name}:`, err instanceof Error ? err.message : err);
+      console.error(`  Sourcing angle failed for ${candidate.name}:`, err instanceof Error ? err.message : err);
     }
   }
 
   const result = await sql`
-    INSERT INTO companies (
-      slug, name, sector, composite_score, previous_score,
-      layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
-      why_summary, sourcing_angle, last_scanned_at
-    ) VALUES (
-      ${slug}, ${company.name}, ${company.sector}, ${compositeScore}, ${previousScore},
-      ${subScores.layoffs}, ${subScores.leadershipExits}, ${subScores.negativePress},
-      ${subScores.glassdoorTrend}, ${subScores.fundingDistress},
-      ${finalWhySummary}, ${sourcingAngle}, now()
-    )
-    ON CONFLICT (slug) DO UPDATE SET
-      name = EXCLUDED.name,
-      sector = EXCLUDED.sector,
-      composite_score = EXCLUDED.composite_score,
-      previous_score = EXCLUDED.previous_score,
-      layoff_score = EXCLUDED.layoff_score,
-      leadership_exit_score = EXCLUDED.leadership_exit_score,
-      press_score = EXCLUDED.press_score,
-      glassdoor_score = EXCLUDED.glassdoor_score,
-      funding_score = EXCLUDED.funding_score,
-      why_summary = EXCLUDED.why_summary,
-      sourcing_angle = EXCLUDED.sourcing_angle,
+    UPDATE companies SET
+      composite_score = ${compositeScore},
+      previous_score = ${previousScore},
+      layoff_score = ${subScores.layoffs},
+      leadership_exit_score = ${subScores.leadershipExits},
+      press_score = ${subScores.negativePress},
+      glassdoor_score = ${subScores.glassdoorTrend},
+      funding_score = ${subScores.fundingDistress},
+      why_summary = ${finalWhySummary},
+      sourcing_angle = ${sourcingAngle},
+      priority_score = ${priorityScore},
       last_scanned_at = now(),
       updated_at = now()
+    WHERE slug = ${candidate.slug}
     RETURNING id
   `;
   const companyId = (result as unknown as { id: number }[])[0].id;
@@ -235,43 +219,55 @@ async function scanAndWriteCompany(
     `;
   }
 
-  return { slug, compositeScore };
+  return { slug: candidate.slug, compositeScore };
 }
 
 export async function runScan({ demo = false, baseUrl }: { demo?: boolean; baseUrl?: string } = {}) {
-  console.log(`[run-scan] Starting ${demo ? "DEMO" : "REAL"} scan of ${SEED_COMPANIES.length} companies...`);
+  // Only Tier A/B companies consume scan budget (active_scan = true — set
+  // at seed time from the CSV's Tier column). Ordered by least-recently-
+  // scanned first so coverage rotates through the full active list across
+  // runs instead of always restarting from the same company and never
+  // reaching the rest — the bug that caused today's incident. Relevance
+  // breaks ties among equally-stale companies.
+  const candidates = (await sql`
+    SELECT slug, name, tier, category, lemfi_relevance_score, competitive_notes, composite_score
+    FROM companies
+    WHERE active_scan = true
+    ORDER BY last_scanned_at ASC NULLS FIRST, lemfi_relevance_score DESC
+  `) as unknown as ScanCandidateRow[];
 
-  const existingRows = (await sql`SELECT slug, composite_score, previous_rank FROM companies`) as unknown as ExistingCompanyRow[];
-  const existingBySlug = new Map(existingRows.map((r) => [r.slug, r]));
+  console.log(`[run-scan] Starting ${demo ? "DEMO" : "REAL"} scan of ${candidates.length} active companies...`);
 
   const results: { slug: string; compositeScore: number | null }[] = [];
-  for (let i = 0; i < SEED_COMPANIES.length; i += CONCURRENCY) {
-    const chunk = SEED_COMPANIES.slice(i, i + CONCURRENCY);
+  for (let i = 0; i < candidates.length; i += CONCURRENCY) {
+    const chunk = candidates.slice(i, i + CONCURRENCY);
     const chunkResults = await Promise.all(
-      chunk.map((company) =>
-        scanAndWriteCompany(company, demo, existingBySlug).catch((err) => {
-          console.error(`  Failed to scan/write ${company.name}:`, err instanceof Error ? err.message : err);
+      chunk.map((candidate) =>
+        scanAndWriteCompany(candidate, demo).catch((err) => {
+          console.error(`  Failed to scan/write ${candidate.name}:`, err instanceof Error ? err.message : err);
           return null;
         })
       )
     );
     results.push(...chunkResults.filter((r): r is NonNullable<typeof r> => r !== null));
 
-    if (!demo && i + CONCURRENCY < SEED_COMPANIES.length) await delay(CHUNK_DELAY_MS);
+    if (!demo && i + CONCURRENCY < candidates.length) await delay(CHUNK_DELAY_MS);
   }
 
-  console.log(`[run-scan] Scanned & wrote ${results.length}/${SEED_COMPANIES.length} companies.`);
+  console.log(`[run-scan] Scanned & wrote ${results.length}/${candidates.length} companies.`);
 
   // Fast pass, no external API calls left — safe even if the scan above
   // got cut short by a timeout, since it only touches whatever's currently
-  // in the DB rather than depending on `results` covering everyone.
+  // in the DB rather than depending on `results` covering everyone. Ranks
+  // by priority_score (the league table's actual default sort) across ALL
+  // 364 companies, not just the ones actively scanned this run.
   const generatedAt = new Date().toISOString();
   const allRows = (await sql`
-    SELECT slug, name, sector, composite_score, previous_score, previous_rank, why_summary
+    SELECT slug, name, sector, composite_score, previous_score, previous_rank, why_summary, priority_score
     FROM companies
   `) as unknown as RankableCompanyRow[];
 
-  const ranked = [...allRows].sort((a, b) => (b.composite_score ?? -1) - (a.composite_score ?? -1));
+  const ranked = [...allRows].sort((a, b) => (b.priority_score ?? -1) - (a.priority_score ?? -1));
   const alertCandidates: AlertCandidate[] = [];
 
   for (let i = 0; i < ranked.length; i++) {

@@ -1,190 +1,95 @@
+import { readFileSync } from "fs";
+import { join } from "path";
+import { parse } from "csv-parse/sync";
+import { ACTIVE_SCAN_TIERS, computeRelevanceScore } from "@/lib/relevance";
+import { categoryToSector } from "@/lib/category-mapping";
 import { Sector } from "@/lib/types";
 
 export interface SeedCompany {
   name: string;
   sector: Sector;
+  category: string;
+  tier: string;
+  activeScan: boolean;
+  relevanceScore: number;
+  mainLocation: string | null;
+  status: string | null;
+  fundingStage: string | null;
+  valuationBand: string | null;
+  valuationNotes: string | null;
+  dataConfidence: string | null;
+  categoryFit: number;
+  marketOverlap: number;
+  productAdjacency: number;
+  talentPoachability: number;
+  growthHeat: number;
+  competitiveNotes: string | null;
 }
 
-/**
- * Best-effort sector tagging, not perfect — see plan doc. The brief's list
- * is labeled "163 companies" but the actual array it provided has 173 names;
- * we seed exactly what was given rather than trimming or padding it.
- */
-export const SEED_COMPANIES: SeedCompany[] = [
-  { name: "118 118 Money", sector: "fintech" },
-  { name: "Abound", sector: "fintech" },
-  { name: "Adform", sector: "adjacent-tech" },
-  { name: "Adumo", sector: "payments" },
-  { name: "Adyen", sector: "payments" },
-  { name: "Africhange", sector: "remittance" },
-  { name: "Afriex", sector: "remittance" },
-  { name: "Airwallex", sector: "payments" },
-  { name: "Alipay", sector: "payments" },
-  { name: "Amazon", sector: "adjacent-tech" },
-  { name: "Amazon Web Services (AWS)", sector: "adjacent-tech" },
-  { name: "Amplifi Capital", sector: "fintech" },
-  { name: "Ant Group", sector: "fintech" },
-  { name: "ASOS", sector: "other" },
-  { name: "Aspora", sector: "remittance" },
-  { name: "Atlantic Money", sector: "remittance" },
-  { name: "Axis", sector: "bank" },
-  { name: "Aza Finance", sector: "remittance" },
-  { name: "Bank Zero", sector: "bank" },
-  { name: "Banked", sector: "payments" },
-  { name: "Blink", sector: "fintech" },
-  { name: "Block", sector: "fintech" },
-  { name: "C.T.Co", sector: "other" },
-  { name: "Callulant", sector: "payments" },
-  { name: "Capital on Tap", sector: "fintech" },
-  { name: "Capital One", sector: "bank" },
-  { name: "Cazoo", sector: "other" },
-  { name: "Checkout.com", sector: "payments" },
-  { name: "Chip", sector: "fintech" },
-  { name: "Chipper", sector: "remittance" },
-  { name: "Cleo", sector: "fintech" },
-  { name: "Creditspring", sector: "fintech" },
-  { name: "Darktrace", sector: "adjacent-tech" },
-  { name: "Deliveroo", sector: "other" },
-  { name: "Depop", sector: "other" },
-  { name: "Dojo", sector: "payments" },
-  { name: "DoorDash", sector: "other" },
-  { name: "dopay", sector: "payments" },
-  { name: "Dynatech", sector: "other" },
-  { name: "Etsy", sector: "other" },
-  { name: "eversend", sector: "remittance" },
-  { name: "Experian", sector: "adjacent-tech" },
-  { name: "FairMoney", sector: "fintech" },
-  { name: "Farfetch", sector: "other" },
-  { name: "Fawry", sector: "payments" },
-  { name: "Flutterwave", sector: "payments" },
-  { name: "Foodics", sector: "adjacent-tech" },
-  { name: "Freetrade", sector: "fintech" },
-  { name: "Funding Circle", sector: "fintech" },
-  { name: "GoCardless", sector: "payments" },
-  { name: "Google", sector: "adjacent-tech" },
-  { name: "Grab", sector: "other" },
-  { name: "Griffin", sector: "bank" },
-  { name: "Improbable", sector: "adjacent-tech" },
-  { name: "Interswitch", sector: "payments" },
-  { name: "iwoca", sector: "fintech" },
-  { name: "Jaja Finance", sector: "fintech" },
-  { name: "Jambopay", sector: "payments" },
-  { name: "Jumo", sector: "fintech" },
-  { name: "Kaluza", sector: "adjacent-tech" },
-  { name: "Klarna", sector: "bnpl" },
-  { name: "Koyo", sector: "fintech" },
-  { name: "Kredete", sector: "fintech" },
-  { name: "Kroo", sector: "bank" },
-  { name: "Kuda", sector: "bank" },
-  { name: "Kuflink", sector: "fintech" },
-  { name: "kyshi", sector: "fintech" },
-  { name: "Leatherback", sector: "remittance" },
-  { name: "Lendable", sector: "fintech" },
-  { name: "Lula", sector: "fintech" },
-  { name: "M-Kopa", sector: "fintech" },
-  { name: "Mara", sector: "fintech" },
-  { name: "Meta", sector: "adjacent-tech" },
-  { name: "Mews", sector: "adjacent-tech" },
-  { name: "Migo", sector: "fintech" },
-  { name: "Mintos", sector: "fintech" },
-  { name: "Mitigate", sector: "other" },
-  { name: "Monese", sector: "bank" },
-  { name: "Moneybox", sector: "fintech" },
-  { name: "MoneyGram", sector: "remittance" },
-  { name: "Mono", sector: "adjacent-tech" },
-  { name: "Monzo Bank", sector: "bank" },
-  { name: "N26", sector: "bank" },
-  { name: "Naked", sector: "other" },
-  { name: "Nala", sector: "remittance" },
-  { name: "Ness", sector: "fintech" },
-  { name: "NewDay", sector: "fintech" },
-  { name: "Nium", sector: "payments" },
-  { name: "Nomba", sector: "payments" },
-  { name: "Nord VPN", sector: "adjacent-tech" },
-  { name: "Nubank", sector: "bank" },
-  { name: "Oardy", sector: "other" },
-  { name: "Octopus Energy", sector: "other" },
-  { name: "OFX", sector: "remittance" },
-  { name: "Omio", sector: "other" },
-  { name: "Omnio", sector: "fintech" },
-  { name: "Onafriq", sector: "payments" },
-  { name: "One:Bank", sector: "bank" },
-  { name: "Onmo", sector: "fintech" },
-  { name: "Opay", sector: "payments" },
-  { name: "OVO Energy", sector: "other" },
-  { name: "Ozow", sector: "payments" },
-  { name: "Paddle", sector: "payments" },
-  { name: "PalmPay", sector: "payments" },
-  { name: "Paymob", sector: "payments" },
-  { name: "Payoneer", sector: "payments" },
-  { name: "Paysend", sector: "remittance" },
-  { name: "Paystack", sector: "payments" },
-  { name: "Pepper Money", sector: "fintech" },
-  { name: "Piggyvest", sector: "fintech" },
-  { name: "Plaid", sector: "adjacent-tech" },
-  { name: "Plend", sector: "fintech" },
-  { name: "Pleo", sector: "fintech" },
-  { name: "Plum", sector: "fintech" },
-  { name: "Pockit", sector: "bank" },
-  { name: "Primer", sector: "payments" },
-  { name: "Qardy", sector: "fintech" },
-  { name: "Remitly", sector: "remittance" },
-  { name: "Revolut", sector: "fintech" },
-  { name: "Ria Money Transfer", sector: "remittance" },
-  { name: "Sendwave", sector: "remittance" },
-  { name: "Skyscanner", sector: "other" },
-  { name: "Smile ID", sector: "adjacent-tech" },
-  { name: "Starling Bank", sector: "bank" },
-  { name: "Stitch", sector: "payments" },
-  { name: "Stripe", sector: "payments" },
-  { name: "Tala", sector: "fintech" },
-  { name: "Tandem Bank", sector: "bank" },
-  { name: "TapTap Send", sector: "remittance" },
-  { name: "Tencent", sector: "adjacent-tech" },
-  { name: "Terrapay", sector: "payments" },
-  { name: "Teya", sector: "payments" },
-  { name: "Thndr", sector: "fintech" },
-  { name: "Thought Machine", sector: "adjacent-tech" },
-  { name: "Thoughtworks", sector: "adjacent-tech" },
-  { name: "Thunes", sector: "payments" },
-  { name: "Trainline", sector: "other" },
-  { name: "TransUnion", sector: "adjacent-tech" },
-  { name: "TrueLayer", sector: "adjacent-tech" },
-  { name: "Tymit", sector: "fintech" },
-  { name: "Umba", sector: "bank" },
-  { name: "Uncapped", sector: "fintech" },
-  { name: "Valr", sector: "fintech" },
-  { name: "Valu", sector: "bnpl" },
-  { name: "Wagestream", sector: "fintech" },
-  { name: "Watu", sector: "fintech" },
-  { name: "Wayflyer", sector: "fintech" },
-  { name: "Western Union", sector: "remittance" },
-  { name: "Wise", sector: "remittance" },
-  { name: "Wolt", sector: "other" },
-  { name: "Xendit", sector: "payments" },
-  { name: "Yapily", sector: "adjacent-tech" },
-  { name: "Yellow Card", sector: "fintech" },
-  { name: "Yoco", sector: "payments" },
-  { name: "Yonder", sector: "fintech" },
-  { name: "zeepay", sector: "remittance" },
-  { name: "Zego", sector: "other" },
-  { name: "Zepz", sector: "remittance" },
-  { name: "Zilch", sector: "bnpl" },
-  { name: "Zone", sector: "adjacent-tech" },
-  { name: "Zopa Bank", sector: "bank" },
-  { name: "Cleva", sector: "fintech" },
-  { name: "Grey", sector: "remittance" },
-  { name: "Aboki Africa", sector: "remittance" },
-  { name: "Raenest", sector: "fintech" },
-  { name: "Chowdeck", sector: "other" },
-  { name: "Cowrywise", sector: "fintech" },
-  { name: "Risevest", sector: "fintech" },
-  { name: "Carbon", sector: "fintech" },
-  { name: "Paga", sector: "payments" },
-  { name: "Brass", sector: "bank" },
-  { name: "Reliance Health", sector: "other" },
-  { name: "Gigbanc", sector: "fintech" },
-];
+interface CsvRow {
+  Company: string;
+  "LemFi Relevance Score": string;
+  Tier: string;
+  Category: string;
+  "Main Employee Location": string;
+  Status: string;
+  "Last Funding Stage": string;
+  "Valuation Band": string;
+  "Est. Valuation / ARR (notes)": string;
+  "Data Confidence": string;
+  "Category Fit": string;
+  "Market Overlap": string;
+  "Product Adjacency": string;
+  "Talent / Stage Poachability": string;
+  "Growth / Heat": string;
+  "Flags / Competitive Notes": string;
+}
+
+function orNull(value: string | undefined): string | null {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : null;
+}
+
+export function loadSeedCompanies(): SeedCompany[] {
+  const csvPath = join(process.cwd(), "data", "target-companies.csv");
+  const csvContent = readFileSync(csvPath, "utf8");
+  const rows = parse(csvContent, { columns: true, skip_empty_lines: true }) as CsvRow[];
+
+  return rows.map((row) => {
+    const categoryFit = Number(row["Category Fit"]);
+    const marketOverlap = Number(row["Market Overlap"]);
+    const productAdjacency = Number(row["Product Adjacency"]);
+    const talentPoachability = Number(row["Talent / Stage Poachability"]);
+    const growthHeat = Number(row["Growth / Heat"]);
+
+    return {
+      name: row.Company.trim(),
+      sector: categoryToSector(row.Category.trim()),
+      category: row.Category.trim(),
+      tier: row.Tier.trim(),
+      activeScan: ACTIVE_SCAN_TIERS.includes(row.Tier.trim()),
+      relevanceScore: computeRelevanceScore({
+        categoryFit,
+        marketOverlap,
+        productAdjacency,
+        talentPoachability,
+        growthHeat,
+      }),
+      mainLocation: orNull(row["Main Employee Location"]),
+      status: orNull(row.Status),
+      fundingStage: orNull(row["Last Funding Stage"]),
+      valuationBand: orNull(row["Valuation Band"]),
+      valuationNotes: orNull(row["Est. Valuation / ARR (notes)"]),
+      dataConfidence: orNull(row["Data Confidence"]),
+      categoryFit,
+      marketOverlap,
+      productAdjacency,
+      talentPoachability,
+      growthHeat,
+      competitiveNotes: orNull(row["Flags / Competitive Notes"]),
+    };
+  });
+}
 
 export function slugify(name: string): string {
   return name

@@ -1,0 +1,365 @@
+Company,LemFi Relevance Score,Tier,Category,Main Employee Location,In Original List,Status,Last Funding Stage,Valuation Band,Est. Valuation / ARR (notes),Data Confidence,Category Fit,Market Overlap,Product Adjacency,Talent / Stage Poachability,Growth / Heat,Flags / Competitive Notes
+Revolut,92.8,A — Priority,Neobanks,UK,Yes,Private,Late/Growth,$10B+,~$75B Nov-25; 65m+ users; perfect CB hiring-momentum; aggressive global hiring,High,90,100,92,76,98,Hottest fintech; multi-product superapp; UK
+Terrapay,91.4,A — Priority,Payment Infrastructure,UK,Yes,Private,Series B,$1-10B,UK global cross-border payment network ~$1B; remittance rails,High,95,100,85,86,82,Direct cross-border/remittance rails — core
+Nala,91.2,A — Priority,Remittance Payments,"Nigeria, UK",Yes,Private,Series A,$50-250M,Africa-focused remittance + Rafiki B2B rails; ~$40m Series A 2024,High,100,100,80,70,88,Direct diaspora-remittance competitor
+TapTap Send,90.5,A — Priority,Remittance Payments,"UK, USA, Nigeria",Yes,Private,Series B,$50-250M,Diaspora remittance to Africa/Asia/LatAm; ~$65m Series B,High,100,100,78,86,75,Direct diaspora-remittance competitor
+Paysend,90.3,A — Priority,Payment Infrastructure,UK,Yes,Private,Series B,$250M-1B,UK card-to-card global remittance+SMB,High,95,100,82,86,78,Direct remittance/cross-border peer; UK
+Wise,90.2,A — Priority,Remittance Payments,"UK, Estonia",Yes,Public,Public (LSE),Public,LSE:WISE ~£11B mkt cap; FY25 rev ~£1.5B; profitable; US listing move,High,100,100,85,70,78,Direct cross-border peer; top talent pool
+Kuda,89.3,A — Priority,Neobanks,Nigeria,Yes,Private,Series B,$250M-1B,Nigeria neobank ~$500m; UK diaspora remittance launched,High,90,100,80,86,82,Nigeria + UK diaspora — direct overlap
+Monzo Bank,89.2,A — Priority,Neobanks,UK,Yes,Private,Late/Growth,$1-10B,UK neobank ~$5.9B 2024; IPO-bound; profitable; 12m+ users,High,90,100,80,76,88,Premier UK neobank talent
+OPay,88.9,A — Priority,Neobanks,Nigeria,Yes,Private,Late/Growth,$1-10B,Nigeria superbank ~$2.75B; massive scale,High,90,100,82,76,85,Nigeria — core market; multi-product
+Aspora,88.2,A — Priority,Remittance Payments,India,Yes,Private,Series B,$250M-1B,"Indian-diaspora remittance; raised at ~$0.5B 2025, Sequoia-backed; hyper-growth",Medium,100,80,78,86,92,Direct diaspora-remittance competitor
+Fincra,88.1,A — Priority,Payment Infrastructure,Nigeria,,Private,Series A,$50-250M,Nigeria cross-border payments/collections API,High,95,100,78,70,80,Nigeria — core; cross-border rails
+Rapyd,88,A — Priority,Payment Infrastructure,UK,,Private,Late/Growth,$1-10B,UK fintech-as-a-service ~$9B; 100+ countries; crypto push,High,95,100,82,76,72,UK; global multi-product rails
+Klasha,87.7,A — Priority,Payment Infrastructure,"Nigeria, UK",,Private,Series A,$50-250M,Nigeria/UK cross-border commerce payments into Africa,High,95,100,78,70,78,Nigeria+UK; cross-border into Africa
+Primer,87.5,A — Priority,Payment Infrastructure,UK,Yes,Private,Series C,$250M-1B,UK payment-orchestration ($100m Series C 2026),High,95,100,62,88,78,UK; hot round; orchestration talent
+FairMoney,87.4,A — Priority,Neobanks,Nigeria,Yes,Private,Series B,$250M-1B,Nigeria digital bank/lender ~$0.5B,High,90,100,72,86,78,Nigeria — core market; credit overlap
+Piggyvest,87.3,A — Priority,Savings / Investments / Wealth,Nigeria,Yes,Private,Bootstrapped/Growth,$50-250M,Nigeria's leading savings+investing app; profitable; mass-market,High,86,100,80,74,85,Nigeria — core; direct savings/invest overlap
+Onafriq,87,A — Priority,Payment Infrastructure,Nigeria,Yes,Private,Late/Growth,$250M-1B,Pan-African mobile-money interoperability (ex-MFS Africa),High,95,100,78,76,70,Pan-African rails — directly relevant
+Djamo,86.7,A — Priority,Neobanks,Cote d'Ivoire,,Private,Series B,$50-250M,Cote d'Ivoire/Senegal neobank; YC; ~$17m 2025,High,90,95,68,86,85,Francophone WA — core hiring market
+Ebury,86.2,A — Priority,Payment Infrastructure,"UK, Spain",,Subsidiary,Santander-majority,$1-10B,UK cross-border FX/payments for SMEs; IPO-bound,High,95,100,78,72,68,Cross-border FX talent; UK/Spain
+Cleo,86.2,A — Priority,Savings / Investments / Wealth,UK,Yes,Private,Series C,$1-10B,UK AI finance assistant ~$0.5-1B; US consumer; fast-growing,High,86,100,65,88,82,UK; AI-native consumer talent
+Zolve,86.1,A — Priority,Neobanks,"India, USA",,Private,Series B,$250M-1B,Cross-border neobank for immigrants (India->US); ~$0.5B,High,90,83,82,86,88,Direct migrant-banking thesis; India-US corridor
+Volt,85.8,A — Priority,Payment Infrastructure,UK,,Private,Series B,$50-250M,UK global A2A/open-payments,Medium,95,100,62,86,70,UK; A2A rails
+Allica Bank,85.8,A — Priority,Neobanks,UK,,Private,Series C,$1-10B,"UK SME bank ~$1B+; profitable, fast-growing",Medium,90,100,55,88,82,UK talent
+HUB2,85.6,A — Priority,Payment Infrastructure,Cote d'Ivoire,,Private,Series A,<$50M,Cote d'Ivoire Francophone payments API ($8.5m Series A),High,95,95,68,70,82,Francophone WA — core hiring market
+Sendwave,85.6,A — Priority,Remittance Payments,"UK, USA",Yes,Subsidiary,Acquired (Zepz),n/a,Part of Zepz (WorldRemit); African/Asian diaspora remittance,High,100,100,72,78,58,Direct competitor (Zepz group)
+Maplerad,85.6,A — Priority,Payment Infrastructure,Nigeria,,Private,Seed/Series A,<$50M,Nigeria/Pan-African banking+payments API; YC,Medium,95,100,72,64,75,Nigeria — core; multi-product infra
+Tide,85.6,A — Priority,Neobanks,UK,,Private,Series C,$250M-1B,UK SME banking; expanding India/Germany,Medium,90,100,62,88,75,UK + India corridor
+Stripe,85.6,A — Priority,Card Payment Processors,"USA, UK",Yes,Private,Late/Growth,$10B+,~$91.5B 2025; global payments leader; elite talent,High,78,100,82,76,85,Premier global fintech talent pool
+Payoneer,85.2,A — Priority,Payment Infrastructure,UK,Yes,Public,Public (Nasdaq),Public,Nasdaq:PAYO; global cross-border SMB payments,High,95,100,80,70,62,Direct cross-border peer; corridors
+Currencycloud,85.1,A — Priority,Payment Infrastructure,UK,,Subsidiary,Visa-owned,n/a,"UK cross-border infra, Visa-owned",Medium,95,100,78,78,58,Cross-border rails talent
+Starling Bank,85,A — Priority,Neobanks,UK,Yes,Private,Late/Growth,$1-10B,UK profitable neobank ~$2.5B; Engine SaaS,High,90,100,68,76,75,UK talent; banking-infra spin (Engine)
+Nium,84.9,A — Priority,Payment Infrastructure,India,Yes,Private,Series E,$1-10B,Cross-border B2B payments ~$1.4B; global rails; India roots,High,95,80,82,80,82,Direct cross-border rails peer; corridors
+Julaya,84.8,A — Priority,Payment Infrastructure,Cote d'Ivoire,,Private,Series A,<$50M,Cote d'Ivoire B2B payments/disbursements,High,95,95,65,70,80,Francophone WA — core hiring market
+Zepz,84.7,A — Priority,Remittance Payments,"UK, USA",Yes,Private,Late/Growth,$1-10B,"WorldRemit+Sendwave; ~$5B peak val, layoffs 2023-24; diaspora remittance",High,100,100,75,76,52,Direct competitor; talent availability rising
+GoCardless,84.6,A — Priority,Payment Infrastructure,UK,Yes,Private,Late/Growth,$1-10B,UK bank-debit/A2A payments unicorn ~$2.1B,High,95,100,68,76,65,UK; A2A rails talent
+Form3,84.6,A — Priority,Payment Infrastructure,UK,,Private,Series C,$250M-1B,UK cloud payments infra for banks,Medium,95,100,62,88,62,UK rails talent
+Modulr,84.6,A — Priority,Payment Infrastructure,UK,,Private,Series C,$250M-1B,UK embedded payments/accounts infra,Medium,95,100,62,88,62,UK rails talent
+Trading 212,84.6,A — Priority,Savings / Investments / Wealth,UK,,Private,Bootstrapped/Growth,$1-10B,UK neobroker; highly profitable; surging,High,86,100,62,74,85,"UK; investments — hot, profitable"
+Branch,84.6,A — Priority,Consumer Credit,"Nigeria, India",,Private,Series C,$250M-1B,Africa/India micro-lending (Nigeria/Kenya); ~$0.5B,Medium,88,100,65,88,70,Nigeria/Kenya/India corridors
+Zopa Bank,84.5,A — Priority,Neobanks,UK,Yes,Private,Series D,$1-10B,UK bank ~$1B; profitable; P2P heritage,Medium,90,100,62,84,72,UK talent
+PalmPay,84.5,A — Priority,Card Payment Processors,Nigeria,Yes,Private,Late/Growth,$250M-1B,Nigeria payments superapp; Transsion-backed; soonicorn,High,78,100,75,76,85,Nigeria — core market; multi-product
+Klarna,84.3,A — Priority,Consumer Credit,"Sweden, UK",Yes,Public,Public (NYSE),Public,IPO 2025 (largest fintech IPO); BNPL->neobank; ~$14B+,High,88,100,72,70,75,BNPL->full banking; talent
+Thunes,84.3,A — Priority,Payment Infrastructure,USA,Yes,Private,Series C,$1-10B,Global cross-border payment network; remittance rails,High,95,74,85,88,80,Direct cross-border/remittance rails — core
+Kroo,84.1,A — Priority,Neobanks,UK,Yes,Private,Series B,$50-250M,UK neobank; deposits-led growth,Medium,90,100,60,86,70,UK talent
+Anchor,84.1,A — Priority,Payment Infrastructure,Nigeria,,Private,Seed/Series A,<$50M,Nigeria BaaS/embedded finance API; YC,Medium,95,100,62,64,75,Nigeria — core market; infra
+Plum,83.4,A — Priority,Savings / Investments / Wealth,UK,Yes,Private,Series B,$50-250M,UK savings+investing app; EU expansion,Medium,86,100,65,86,68,UK; savings+investments overlap
+Lendable,83.3,A — Priority,Consumer Credit,UK,Yes,Private,Late/Growth,$1-10B,UK consumer lending unicorn ~$4B; profitable,High,88,100,60,76,75,UK talent; credit
+Risevest,83.1,A — Priority,Savings / Investments / Wealth,Nigeria,,Private,Seed/Series A,<$50M,Nigeria USD investing for Africans; cross-border wealth,Medium,86,100,72,64,75,Nigeria — core; cross-border wealth
+Lightyear,83.1,A — Priority,Savings / Investments / Wealth,"UK, Estonia",,Private,Series B,$50-250M,UK/Estonia investing app; fast-growing,Medium,86,100,58,86,72,UK; investments
+Cowrywise,82.9,A — Priority,Savings / Investments / Wealth,Nigeria,,Private,Series A,<$50M,Nigeria savings+investing app,Medium,86,100,70,70,72,Nigeria — core; savings+investments
+Paystack,82.7,A — Priority,Card Payment Processors,Nigeria,Yes,Subsidiary,Acquired (Stripe),n/a,"Nigeria payments, Stripe-owned; elite eng brand",High,78,100,70,78,78,Nigeria — premier eng talent (Stripe-grade)
+Marshmallow,82.5,A — Priority,Insurtech,"UK, Estonia",Yes,Private,Series B,$1-10B,UK migrant-focused car insurance; ~$2B 2024; underserved-segment thesis,High,70,100,72,86,82,Underserved/migrant focus mirrors LemFi; UK
+Nomba,82.4,A — Priority,Card Payment Processors,Nigeria,Yes,Private,Series B,$50-250M,Nigeria merchant payments; Base10/Shopify-backed,Medium,78,100,65,86,75,Nigeria — core market
+Kredete,82.4,A — Priority,Remittance Payments,USA,Yes,Private,Seed/Series A,<$50M,African-diaspora remittance + credit-building on stablecoin rails,Medium,100,74,82,64,80,Direct competitor; stablecoin+credit overlap
+Bamboo,82.3,A — Priority,Savings / Investments / Wealth,Nigeria,,Private,Series A,<$50M,Nigeria US-stocks investing app,Medium,86,100,68,70,70,Nigeria — core; investments
+Airwallex,82,A — Priority,Payment Infrastructure,Singapore,Yes,Private,Series F,$10B+,Global cross-border B2B payments ~$10.6B+; hyper-growth; IPO-bound,High,95,62,85,78,92,Direct cross-border rails peer; hot
+Zilch,82,A — Priority,Consumer Credit,UK,Yes,Private,Late/Growth,$1-10B,UK BNPL unicorn ~$2B; ad-subsidised model,Medium,88,100,60,76,68,UK talent; BNPL
+Migo,81.7,A — Priority,Consumer Credit,UK,Yes,Private,Series B,$50-250M,Credit-as-a-service for EM (Nigeria/Brazil),Medium,88,100,62,86,58,EM credit infra
+Stitch,81.7,A — Priority,Payment Infrastructure,India,Yes,Private,Series B,$50-250M,SA/Pan-African payments infra (pay-by-bank),Medium,95,80,68,86,72,Pan-African rails
+Mercury,81.7,A — Priority,Neobanks,USA,,Private,Series D,$1-10B,$5.2B May-26; US startup banking; national charter path,High,90,74,68,84,90,US talent; hyper-growth
+Juspay,81.6,A — Priority,Payment Infrastructure,India,,Private,Series D,$1-10B,India payments orchestration unicorn ~$1B,Medium,95,80,62,84,78,India corridor
+Foodics,81.5,A — Priority,Superapps,Nigeria,Yes,Private,Series C,$250M-1B,Saudi/MENA restaurant-tech+fintech,Medium,82,100,62,88,65,MENA; multi-product
+Adyen,81,A — Priority,Card Payment Processors,"UK, USA",Yes,Public,Public (Euronext),Public,Euronext:ADYEN; ~€40-50B; premier enterprise payments,High,78,100,72,70,72,Elite payments eng/commercial talent
+Duplo,81,A — Priority,Payment Infrastructure,Nigeria,,Private,Seed,<$50M,Nigeria B2B payments,Low,95,100,58,58,65,Nigeria — core market
+PhonePe,80.7,A — Priority,Superapps,India,,Private,Late/Growth,$1-10B,India payments superapp ~$12B; IPO-bound; dominant UPI,High,82,80,82,76,82,India corridor; multi-product; hot
+Hubpay,80.7,A — Priority,Payment Infrastructure,UAE,,Private,Series A,$50-250M,UAE cross-border payments for SMEs/remittance,High,95,76,78,70,75,Gulf corridor; remittance-adjacent
+Wagestream,80.7,A — Priority,Superapps,UK,Yes,Private,Series C,$250M-1B,UK earned-wage access+financial wellbeing,Medium,82,100,60,88,62,UK; financial-wellbeing
+Mangopay,80.6,A — Priority,Payment Infrastructure,UK,Yes,Private,PE-backed,$250M-1B,UK/Lux marketplace payments infra,Medium,95,100,58,70,55,UK
+Tabby,80.6,A — Priority,Consumer Credit,UAE,,Private,Series E,$1-10B,UAE/Saudi BNPL+ unicorn ~$3.3B; multi-product push,High,88,76,70,80,85,Gulf — hot; multi-product
+Lenco,80.5,A — Priority,Neobanks,Nigeria,,Private,Series A,<$50M,Nigeria/Pan-African SME banking,Medium,90,100,58,70,62,Nigeria — core market
+Abound,80.4,A — Priority,Consumer Credit,UK,Yes,Private,Series A,$50-250M,UK AI-led consumer lending (Open Banking),Medium,88,100,58,70,65,UK; OB-driven credit
+Mono,80.4,A — Priority,Open Banking,Nigeria,,Private,Series A,$50-250M,Nigeria open-banking/financial-data API; YC,High,72,100,72,70,78,Nigeria — core; OB/data infra
+Niyo,80.4,A — Priority,Neobanks,India,,Private,Series C,$250M-1B,India neobank; cross-border/forex cards for travellers,Medium,90,80,72,88,68,India corridor + forex overlap
+Pyypl,80.2,A — Priority,Payment Infrastructure,UAE,,Private,Series B,$50-250M,UAE/MENA payments for underbanked,Medium,95,76,70,86,68,Gulf; underbanked thesis
+Creditspring,80.1,A — Priority,Consumer Credit,UK,Yes,Private,Series B,$50-250M,UK subscription credit,Low,88,100,55,86,55,UK
+Atom Bank,79.9,A — Priority,Neobanks,UK,,Private,Late/Growth,$250M-1B,UK app bank; pre-IPO,Medium,90,100,58,76,55,UK talent
+Cover Genius,79.9,A — Priority,Insurtech,"Australia, UK",Yes,Private,Series E,$1-10B,Embedded insurance; ~$1B+ val 2024; global embedded distribution,Medium,70,100,68,80,75,Embedded insurance — relevant to LemFi insurance product
+ClearBank,79.6,A — Priority,Banking Infrastructure,UK,Yes,Private,Late/Growth,$1-10B,UK clearing/embedded banking ~$1B+; profitable,High,74,100,62,76,75,UK infra; rails talent
+Dojo,79.6,A — Priority,Card Payment Processors,UK,Yes,Private,Late/Growth,$1-10B,UK SMB card payments unicorn; profitable,Medium,78,100,58,76,72,UK talent
+Groww,79.6,A — Priority,Savings / Investments / Wealth,India,,Public,Public (NSE/BSE),Public,India investing platform; IPO 2025; ~$7B+,High,86,80,68,70,85,India corridor; investments — GM I&S relevant
+SumUp,79.6,A — Priority,Card Payment Processors,"UK, Germany",,Private,Late/Growth,$1-10B,UK/Germany SMB payments ~$8.5B; profitable,Medium,78,100,60,76,70,UK/EU talent
+Carbon,79.5,A — Priority,Consumer Credit,Nigeria,,Private,Private,$50-250M,Nigeria digital lending/bank,Medium,88,100,62,68,58,Nigeria — core market
+Ozow,79.5,A — Priority,Payment Infrastructure,South Africa,Yes,Private,Series B,$50-250M,SA instant EFT/pay-by-bank,Medium,95,80,62,86,65,SA market; A2A rails
+Aella,79.5,A — Priority,Consumer Credit,Nigeria,,Private,Seed/Series A,<$50M,Nigeria consumer lending,Medium,88,100,60,64,62,Nigeria — core market
+Wahed,79.5,A — Priority,Savings / Investments / Wealth,UAE,,Private,Series C,$250M-1B,Global Islamic/halal investing; diaspora-focused,High,86,76,72,88,75,Halal investing for diaspora — LemFi-adjacent
+Updraft,79.5,A — Priority,Consumer Credit,UK,,Private,Series A,$50-250M,UK credit-consolidation app,Low,88,100,55,70,62,UK
+KreditBee,79.2,A — Priority,Consumer Credit,India,,Private,Series E,$1-10B,"India consumer lending ~$1.5B (Mar-26, $280m Series E)",High,88,80,60,80,80,India corridor; hot round
+Experian,79.2,A — Priority,Consumer Credit,UK,Yes,Public,Public (LSE),Public,LSE:EXPN; global credit bureau; data/analytics,High,88,100,62,70,55,UK; credit-data talent
+Checkout.com,79.2,A — Priority,Card Payment Processors,UK,Yes,Private,Late/Growth,$1-10B,"UK payments; ~$40B peak, repriced; still major",High,78,100,72,76,58,UK — top payments talent
+Freetrade,79,A — Priority,Savings / Investments / Wealth,UK,Yes,Subsidiary,Acquired (IG),n/a,"UK neobroker, IG-owned 2025",Medium,86,100,58,78,55,UK; investments
+CinetPay,79,A — Priority,Card Payment Processors,Cote d'Ivoire,,Private,Seed/Series A,<$50M,Cote d'Ivoire pan-Francophone payments aggregator,Medium,78,95,65,64,78,Francophone WA — core hiring market
+Tandem Bank,78.9,A — Priority,Neobanks,UK,Yes,Private,Late/Growth,$250M-1B,UK green digital bank,Medium,90,100,55,76,52,UK talent
+Interswitch,78.9,A — Priority,Card Payment Processors,Nigeria,Yes,Private,Late/Growth,$1-10B,Nigeria payments incumbent ~$1B; Visa-backed,High,78,100,70,76,58,Nigeria — core market; rails talent
+InvestEngine,78.9,A — Priority,Savings / Investments / Wealth,UK,,Private,Series A,$50-250M,UK low-cost ETF investing,Low,86,100,55,70,62,UK; investments
+Paddle,78.9,A — Priority,Card Payment Processors,UK,Yes,Private,Series D,$1-10B,UK SaaS merchant-of-record ~$1.4B,Medium,78,100,55,84,65,UK talent
+Moneyfarm,78.8,A — Priority,Savings / Investments / Wealth,"UK, Italy",,Private,Series D,$250M-1B,UK/Italy digital wealth,Medium,86,100,55,84,52,UK; wealth
+Thought Machine,78.7,A — Priority,Banking Infrastructure,UK,Yes,Private,Series D,$1-10B,UK core-banking ~$2.7B; Vault platform,High,74,100,58,84,68,UK infra talent — top engineering
+Banked,78.7,A — Priority,Consumer Credit,UK,Yes,Private,Series A,$50-250M,UK pay-by-bank/account-to-account,Low,88,100,55,70,58,UK; A2A
+Brass,78.5,A — Priority,Neobanks,Nigeria,,Private,Seed/Series A,<$50M,Nigeria SME banking; acquired/recap 2023,Medium,90,100,58,64,55,Nigeria — core market
+INDmoney,78.5,A — Priority,Savings / Investments / Wealth,India,,Private,Series D,$250M-1B,India wealth/US-stocks investing app,Medium,86,80,65,84,72,India corridor; investments
+Renmoney,78.4,A — Priority,Consumer Credit,Nigeria,,Private,Private,$50-250M,Nigeria consumer lending,Low,88,100,58,68,55,Nigeria — core market
+Paymob,78.4,A — Priority,Card Payment Processors,Egypt,Yes,Private,Series B,$250M-1B,Egypt/MENA/Pakistan payments; fast-growing,High,78,80,68,86,80,MENA + Pakistan corridors
+Nutmeg,78.3,A — Priority,Savings / Investments / Wealth,UK,,Subsidiary,JPMorgan-owned,n/a,"UK robo-advisor, JPM/Chase-owned",Medium,86,100,55,83,50,UK; wealth talent
+TrueLayer,78.2,A — Priority,Open Banking,UK,Yes,Private,Series E,$1-10B,UK open-banking/A2A payments unicorn ~$1B,High,72,100,65,80,65,UK; A2A rails talent
+Chime,78.2,A — Priority,Neobanks,USA,,Public,Public (Nasdaq),Public,"IPO Jun-25 ($864m, largest US neobank IPO); 22m+ users",High,90,74,68,70,80,US talent
+Robinhood,78,A — Priority,Savings / Investments / Wealth,USA,,Public,Public (Nasdaq),Public,Nasdaq:HOOD; US investing leader; multi-product expansion,High,86,74,72,70,82,US; investments — hot; multi-product
+Plend,78,A — Priority,Consumer Credit,UK,Yes,Private,Seed/Series A,<$50M,UK ethical consumer lending (Open Banking),Low,88,100,55,64,58,UK; OB credit
+Razorpay,78,A — Priority,Card Payment Processors,India,,Private,Series F,$1-10B,India payments unicorn ~$7.5B; multi-product,High,78,80,72,78,80,India corridor; multi-product
+Neo Financial,78,A — Priority,Neobanks,Canada,,Private,Series D,$1-10B,Canada neobank unicorn ~$1B; C$68.5m Jan-25,Medium,90,70,65,84,78,Diaspora destination
+Watu,77.9,B — Strong,Consumer Credit,Kenya,Yes,Private,Private/Growth,$50-250M,Kenya/East-Africa asset (boda) financing; fast-growing,Medium,88,82,62,74,72,East Africa market
+Navi,77.8,B — Strong,Neobanks,India,,Private,Late/Growth,$1-10B,India lending+neobank (Sachin Bansal); ~$2B,Medium,90,80,68,76,65,India corridor
+Jar,77.8,B — Strong,Savings / Investments / Wealth,India,,Private,Series C,$250M-1B,India micro-savings/gold app,Medium,86,80,62,88,68,India corridor; savings
+Sparkle,77.7,B — Strong,Neobanks,Nigeria,,Private,Seed/Series A,<$50M,Nigeria neobank,Low,90,100,55,69,50,Nigeria — core market
+Griffin,77.7,B — Strong,Banking Infrastructure,UK,Yes,Private,Series A,$50-250M,UK BaaS with banking licence,Medium,74,100,60,70,70,UK infra talent
+NOW Money,77.5,B — Strong,Neobanks,UAE,,Private,Series A,<$50M,UAE banking for migrant/low-income workers,Medium,90,76,72,70,70,Migrant-worker focus = LemFi-adjacent
+Current,77.5,B — Strong,Neobanks,USA,,Private,Series D,$1-10B,US neobank; 90%+ rev growth,Medium,90,74,62,84,72,US talent
+Fi (epiFi),77.5,B — Strong,Neobanks,India,,Private,Series C,$250M-1B,India neobank ~$0.6B,Medium,90,80,62,88,60,India diaspora corridor
+SoFi,77.4,B — Strong,Neobanks,USA,,Public,Public (Nasdaq),Public,Nasdaq:SOFI; US chartered fintech bank; multi-product,High,90,74,75,70,70,US talent; multi-product model
+Wealthsimple,77.3,B — Strong,Savings / Investments / Wealth,Canada,,Private,Late/Growth,$1-10B,Canada wealth+banking ~$3.5B; multi-product; fast-growing,High,86,70,72,76,80,Diaspora destination; multi-product
+Amplifi Capital,77.2,B — Strong,Consumer Credit,UK,Yes,Private,Private,<$50M,UK near-prime lending (Reevo/My Community Finance),Low,88,100,52,73,50,UK
+Curve,77.2,B — Strong,Credit Cards,UK,,Private,Series C,$250M-1B,UK card-aggregation+wallet,Medium,74,100,60,88,55,UK; wallet
+Token.io,77.2,B — Strong,Open Banking,UK,,Private,Series C,$50-250M,UK A2A/open-banking payments,Low,72,100,60,88,58,UK; A2A
+Money View,77.1,B — Strong,Consumer Credit,India,,Private,Series E,$1-10B,India consumer lending unicorn ~$1.2B,Medium,88,80,58,80,70,India corridor
+Jupiter,77.1,B — Strong,Neobanks,India,,Private,Series C,$250M-1B,India neobank,Medium,90,80,62,88,58,India corridor
+Yonder,77.1,B — Strong,Credit Cards,UK,Yes,Private,Series A,$50-250M,UK premium rewards credit card; fast-growing,Medium,74,100,58,70,68,UK; consumer credit talent
+Yango,77,B — Strong,Superapps,UAE,,Private,Private/Growth,$1-10B,MENA/Africa superapp (rides->fintech); expanding,Medium,82,76,78,74,72,Africa/MENA expansion; multi-product
+Tala,77,B — Strong,Consumer Credit,USA,Yes,Private,Series E,$500M-1B,US/EM micro-credit (Kenya/Philippines/Mexico/India),High,88,74,68,80,70,EM credit; Philippines + Kenya overlap
+Decentro,77,B — Strong,Payment Infrastructure,India,,Private,Series A,$50-250M,India banking/payments API,Low,95,80,58,70,65,India corridor
+10x Banking,77,B — Strong,Banking Infrastructure,UK,Yes,Private,Series C,$250M-1B,UK cloud core-banking; Engine-style,Medium,74,100,55,88,58,UK infra talent
+Salad Money,77,B — Strong,Consumer Credit,UK,,Private,Private,<$50M,UK public-sector employee lending (OB),Low,88,100,52,68,52,UK
+Wealthify,76.9,B — Strong,Savings / Investments / Wealth,UK,,Subsidiary,Aviva-owned,n/a,"UK robo-advisor, Aviva-owned",Low,86,100,52,83,45,UK
+Thndr,76.9,B — Strong,Savings / Investments / Wealth,Egypt,Yes,Private,Series A,$50-250M,Egypt/MENA retail investing; fast-growing,Medium,86,80,62,70,75,Egypt/MENA; investments
+Zerodha,76.9,B — Strong,Savings / Investments / Wealth,India,,Private,Bootstrapped,$1-10B,India's largest broker; highly profitable; bootstrapped,High,86,80,62,70,75,India corridor; investments leader
+Tymit,76.7,B — Strong,Credit Cards,UK,Yes,Private,Series B,$50-250M,UK instalment credit cards,Low,74,100,55,86,58,UK
+smallcase,76.6,B — Strong,Savings / Investments / Wealth,India,,Private,Series C,$250M-1B,India investing/portfolios,Medium,86,80,58,88,65,India corridor; investments
+Valu,76.6,B — Strong,Consumer Credit,Egypt,Yes,Public,Public (EGX),Public,Egypt BNPL/consumer finance; listed 2025,Medium,88,80,65,70,68,Egypt market; BNPL
+Yapily,76.6,B — Strong,Open Banking,UK,Yes,Private,Series B,$50-250M,UK open-banking infra,Medium,72,100,58,86,58,UK; OB infra
+Teya,76.6,B — Strong,Card Payment Processors,"UK, Latvia",Yes,Private,Late/Growth,$1-10B,UK/EU SMB payments (ex-SaltPay),Medium,78,100,58,76,55,UK talent
+Naked,76.4,B — Strong,Insurtech,UK,Yes,Private,Series B,$50-250M,SA AI-driven insurance; DEG-backed,Medium,70,100,52,86,65,SA market
+Careem,76.3,B — Strong,Superapps,UAE,,Subsidiary,Uber-owned,$1-10B,MENA superapp (Uber); Careem Pay,Medium,82,76,82,78,62,MENA; superapp model
+118 118 Money,76.3,B — Strong,Consumer Credit,UK,Yes,Private,Private,<$50M,UK near-prime consumer credit,Low,88,100,52,73,45,UK
+Tink,76.3,B — Strong,Open Banking,"UK, Sweden",,Subsidiary,Visa-owned,n/a,"Sweden/UK OB leader, Visa-owned",Medium,72,100,62,78,58,OB data talent
+YuLife,76.2,B — Strong,Insurtech,UK,Yes,Private,Series C,$250M-1B,UK group life/wellbeing insurtech; ~$0.8B,Medium,70,100,55,88,60,UK talent
+Oakbrook,76,B — Strong,Consumer Credit,UK,,Private,Private,<$50M,UK consumer lending,Low,88,100,50,73,45,UK
+Sarwa,75.9,B — Strong,Savings / Investments / Wealth,UAE,,Private,Series B,$50-250M,UAE robo-advisor+investing; MENA,Medium,86,76,62,86,65,Gulf; investments
+Cashfree Payments,75.9,B — Strong,Card Payment Processors,India,,Private,Series C,$250M-1B,India payments+payouts,Medium,78,80,62,88,70,India corridor
+Block,75.9,B — Strong,Superapps,USA,Yes,Public,Public (NYSE),Public,NYSE:XYZ; Square+Cash App+Afterpay; multi-product,High,82,74,82,70,68,US; multi-product fintech talent
+Fibe,75.8,B — Strong,Consumer Credit,India,,Private,Series E,$250M-1B,India consumer lending,Medium,88,80,55,80,65,India corridor
+Open,75.8,B — Strong,Neobanks,India,,Private,Series D,$1-10B,India SME neobank unicorn ~$1B,Medium,90,80,60,84,55,India corridor
+Nubank,75.8,B — Strong,Neobanks,Brazil,Yes,Public,Public (NYSE),Public,>$60B mkt cap; 125m+ customers; LatAm; US charter approval Jan-26,High,90,52,82,70,88,Premier EM neobank talent
+M2P Fintech,75.7,B — Strong,Banking Infrastructure,India,,Private,Series D,$1-10B,India API banking infra ~$1B,Medium,74,80,62,84,78,India corridor; infra
+YouLend,75.7,B — Strong,Business Lending,UK,,Private,Late/Growth,$250M-1B,UK embedded SME finance; partners w/ Amazon etc.,Medium,64,100,58,76,72,UK; embedded; partnerships
+Bud,75.6,B — Strong,Open Banking,UK,,Private,Series B,$50-250M,UK open-banking data/AI,Low,72,100,55,86,55,UK
+Axio,75.5,B — Strong,Consumer Credit,India,,Subsidiary,Acquired (Amazon),n/a,"India BNPL/credit, Amazon-acquired 2025",Medium,88,80,58,78,62,India corridor
+TransferMate,75.4,B — Strong,Payment Infrastructure,Ireland,,Private,Late/Growth,$1-10B,Ireland B2B cross-border payments ~$1B,Medium,95,62,75,76,65,Cross-border rails peer
+Pepper Money,75.4,B — Strong,Consumer Credit,"UK, Australia",Yes,Public,Public (ASX),Public,UK/AU non-bank lender,Low,88,100,48,75,42,UK
+Affirm,75.4,B — Strong,Consumer Credit,USA,Yes,Public,Public (Nasdaq),Public,Nasdaq:AFRM; US BNPL leader; expanding EU,High,88,74,65,70,70,US talent; BNPL->banking
+KOHO,75.2,B — Strong,Neobanks,Canada,,Private,Series D,$250M-1B,Canada neobank; banking-licence push; ~C$800m,Medium,90,70,62,84,65,Diaspora destination
+JazzCash,75.2,B — Strong,Neobanks,Pakistan,,Subsidiary,Telco-backed,$250M-1B,Pakistan mobile wallet (Jazz/VEON),Low,90,78,68,66,60,Pakistan corridor
+Easypaisa Digital Bank,75.1,B — Strong,Neobanks,Pakistan,,Subsidiary,Telco-backed,$250M-1B,Pakistan digital bank (Telenor/Ant),Low,90,78,65,66,62,Pakistan corridor
+Capital One,75,B — Strong,Credit Cards,"UK, USA",Yes,Public,Public (NYSE),Public,NYSE:COF; US credit-card giant; Discover deal,Medium,74,100,60,70,55,US/UK; credit + data talent
+Wayflyer,75,B — Strong,Business Lending,UK,Yes,Private,Series C,$1-10B,Ireland/UK e-comm financing unicorn ~$1.6B,Medium,64,100,52,88,65,UK talent
+Upstox,75,B — Strong,Savings / Investments / Wealth,India,,Private,Late/Growth,$1-10B,India neobroker unicorn,Medium,86,80,60,76,62,India corridor; investments
+Cred,74.8,B — Strong,Superapps,India,,Private,Late/Growth,$1-10B,India fintech superapp ~$6.4B (repriced down),Medium,82,80,75,76,55,India corridor; multi-product
+SadaPay,74.8,B — Strong,Neobanks,Pakistan,,Subsidiary,Acquired (Papara),<$50M,"Pakistan neobank, acquired by Papara",Low,90,78,58,78,58,Pakistan corridor
+Lean Technologies,74.7,B — Strong,Open Banking,UAE,,Private,Series B,$250M-1B,Saudi/UAE open-banking infra; fast-growing,Medium,72,76,68,86,75,Gulf; OB infra
+Wio Bank,74.6,B — Strong,Neobanks,UAE,,Subsidiary,State-backed,$250M-1B,UAE digital bank (ADQ et al.),Low,90,76,62,66,65,Gulf corridor
+Paytm (One97),74.6,B — Strong,Superapps,India,,Public,Public (NSE/BSE),Public,India payments superapp; recovering,Medium,82,80,78,70,55,India corridor; multi-product
+Superscript,74.6,B — Strong,Insurtech,UK,Yes,Private,Series B,$50-250M,UK SME insurance broker,Medium,70,100,48,86,58,UK talent
+Zego,74.6,B — Strong,Insurtech,UK,Yes,Private,Series C,$250M-1B,UK gig/fleet motor insurance unicorn; retrench,Medium,70,100,52,93,50,UK talent
+Liberis,74.5,B — Strong,Business Lending,UK,,Private,Series C,$50-250M,UK embedded SME finance,Medium,64,100,55,88,60,UK; embedded finance
+Plaid,74.5,B — Strong,Open Banking,USA,Yes,Private,Late/Growth,$1-10B,US open-banking leader ~$6B+; IPO-bound; hot,High,72,74,70,76,82,US; premier OB/data talent
+Cellulant,74.5,B — Strong,Card Payment Processors,Kenya,Yes,Private,Late/Growth,$50-250M,Pan-African payments (Tingg),Medium,78,82,68,76,62,Pan-African corridors
+iwoca,74.4,B — Strong,Business Lending,UK,Yes,Private,Late/Growth,$250M-1B,"UK SME lending; profitable, scaling",Medium,64,100,52,76,70,UK talent
+Fawry,74.3,B — Strong,Card Payment Processors,Egypt,Yes,Public,Public (EGX),Public,Egypt payments super-network; listed,Medium,78,80,72,70,65,Egypt market; multi-product
+Public,74.3,B — Strong,Savings / Investments / Wealth,USA,,Private,Series D,$1-10B,US investing app ~$1.5B,Medium,86,74,60,84,62,US; investments
+PayU,74.2,B — Strong,Card Payment Processors,India,,Subsidiary,Prosus-owned,$1-10B,Global EM payments (Prosus); India core,Medium,78,80,68,78,62,India/EM corridors
+myPOS,74.2,B — Strong,Card Payment Processors,UK,,Private,Private,$50-250M,UK/EU SMB payments,Low,78,100,52,68,52,UK
+Perfios,74.2,B — Strong,Banking Infrastructure,India,,Private,Series D,$1-10B,India financial-data infra unicorn,Medium,74,80,55,84,75,India corridor
+Modern Treasury,74.1,B — Strong,Banking Infrastructure,USA,,Private,Series C,$1-10B,US payment-ops infra ~$2B,Medium,74,74,62,88,75,US infra; payment-ops talent
+Capital on Tap,74.1,B — Strong,Business Lending,UK,Yes,Private,PE/Growth,$250M-1B,UK SME card+credit; profitable,Medium,64,100,55,72,68,UK talent
+Zeta,74,B — Strong,Banking Infrastructure,India,,Private,Series D,$1-10B,India banking-tech unicorn ~$2B,Medium,74,80,60,84,70,India corridor
+BharatPe,73.9,B — Strong,Card Payment Processors,India,,Private,Late/Growth,$1-10B,India merchant payments+credit ~$2.85B,Medium,78,80,68,76,62,India corridor; multi-product
+Qonto,73.9,B — Strong,Neobanks,France,,Private,Series D,$1-10B,"France SME neobank ~$5B; profitable, scaling EU",Medium,90,52,68,84,80,EU SME
+Jaja Finance,73.9,B — Strong,Credit Cards,UK,Yes,Private,Late/Growth,$50-250M,UK digital credit cards,Low,74,100,52,81,48,UK
+Yoco,73.9,B — Strong,Card Payment Processors,South Africa,Yes,Private,Series C,$250M-1B,SA SMB payments,Medium,78,80,58,88,62,SA market
+Pine Labs,73.8,B — Strong,Card Payment Processors,India,,Public,Public (NSE/BSE),Public,India merchant payments+issuing; listed 2025,Medium,78,80,65,70,68,India corridor
+NymCard,73.8,B — Strong,Banking Infrastructure,UAE,,Private,Series B,$50-250M,UAE/MENA card-issuing BaaS; fast-growing,Medium,74,76,62,86,72,Gulf/EM issuing infra
+NewDay,73.5,B — Strong,Credit Cards,UK,Yes,Private,PE-backed,$1-10B,UK consumer credit-cards issuer; large,Medium,74,100,52,75,50,UK; credit-card talent
+Jambopay,73.5,B — Strong,Card Payment Processors,Nigeria,Yes,Private,Private,<$50M,Nigeria/Kenya payments,Low,78,100,52,73,45,Nigeria/Kenya
+Varo,73.5,B — Strong,Neobanks,USA,,Private,Late/Growth,$1-10B,US chartered neobank ~$2.5B; underbanked focus,Medium,90,74,62,76,55,US talent; inclusion thesis
+INSHUR,73.5,B — Strong,Insurtech,"UK, USA",,Private,Series B,$50-250M,UK/US gig-economy motor insurance,Low,70,100,48,86,52,UK/US talent
+Grab,73.5,B — Strong,Superapps,Singapore,Yes,Public,Public (Nasdaq),Public,SEA superapp (rides/delivery/fintech); profitable turn,High,82,62,85,70,70,SEA; multi-product superapp model
+Dave,73.4,B — Strong,Neobanks,USA,,Public,Public (Nasdaq),Public,US neobank; turnaround to profitability,Medium,90,74,58,70,62,US talent
+Slice,73.4,B — Strong,Credit Cards,India,,Private,Late/Growth,$1-10B,India credit+neobank unicorn; bank merger,Medium,74,80,65,76,68,India corridor; multi-product
+Salt Edge,73.4,B — Strong,Open Banking,"Canada, UK",,Private,Bootstrapped,<$50M,Canada/UK open-banking API,Low,72,100,55,75,50,
+Acorns,73.3,B — Strong,Savings / Investments / Wealth,USA,,Private,Late/Growth,$1-10B,US micro-investing ~$1.9B,Medium,86,74,62,76,60,US; savings+investments
+Wealthfront,73.3,B — Strong,Savings / Investments / Wealth,USA,,Private,Late/Growth,$1-10B,US robo-advisor; IPO-bound,Medium,86,74,62,76,60,US; wealth
+Onmo,73.2,B — Strong,Credit Cards,UK,Yes,Private,Series A,<$50M,UK credit-card+lending app,Low,74,100,52,75,48,UK
+Liv,73.1,B — Strong,Neobanks,UAE,,Subsidiary,Bank-owned,n/a,Emirates NBD digital bank UAE,Low,90,76,58,78,52,Gulf corridor
+Plooto,73,B — Strong,Payment Infrastructure,Canada,,Private,Series B,$50-250M,Canada SMB payments/AP-AR,Low,95,70,52,86,52,
+Kriya,72.9,B — Strong,Business Lending,UK,,Private,Series B,$50-250M,UK B2B payments+credit (ex-MarketFinance),Low,64,100,52,86,55,UK talent
+Moneyhub,72.9,B — Strong,Open Banking,UK,,Private,Private,$50-250M,UK open-finance data platform,Low,72,100,55,68,52,UK
+Unit,72.9,B — Strong,Banking Infrastructure,USA,,Private,Series C,$1-10B,US BaaS unicorn ~$1.2B,Medium,74,74,60,88,70,US infra talent
+Jumo,72.8,B — Strong,Banking Infrastructure,South Africa,Yes,Private,Late/Growth,$250M-1B,SA/Pan-African banking-as-a-service for EM credit,Medium,74,80,68,76,62,African EM credit infra
+Uncapped,72.6,B — Strong,Business Lending,UK,Yes,Private,Series B,$50-250M,UK revenue-based financing,Low,64,100,50,86,55,UK talent
+Acko,72.6,B — Strong,Insurtech,India,,Private,Series D,$1-10B,India unicorn ~$1.4B; auto/health/embedded insurance,Medium,70,80,58,84,70,India diaspora market
+Zand Bank,72.5,B — Strong,Neobanks,UAE,,Private,Private,$250M-1B,UAE digital bank,Low,90,76,58,68,55,Gulf corridor
+Imprint,72.5,B — Strong,Credit Cards,USA,,Private,Series C,$250M-1B,US co-brand credit-card platform; fast-growing,Medium,74,74,55,88,72,US; issuing talent
+YAP,72.4,B — Strong,Neobanks,UAE,,Private,Series A,<$50M,UAE/MENA neobank,Low,90,76,58,75,50,Gulf corridor
+Tractable,72.4,B — Strong,Insurtech,UK,Yes,Private,Series E,$1-10B,UK AI accident/damage; ~$1B val,Medium,70,100,42,80,55,UK AI talent
+OFX,72.3,B — Strong,Remittance Payments,Australia,Yes,Public,Public (ASX),Public,"ASX:OFX, ~A$300-400m mkt cap; cross-border FX/payments",High,100,52,80,70,55,Direct cross-border peer
+Baraka,72.1,B — Strong,Savings / Investments / Wealth,UAE,,Private,Series A,<$50M,UAE retail investing,Low,86,76,58,70,58,Gulf; investments
+Stake,72.1,B — Strong,Savings / Investments / Wealth,UAE,,Private,Series A,$50-250M,UAE/AU investing app,Low,86,76,58,70,58,Gulf; investments
+Betterment,72.1,B — Strong,Savings / Investments / Wealth,USA,,Private,Late/Growth,$1-10B,US robo-advisor ~$1.3B,Medium,86,74,60,76,55,US; wealth
+Western Union,72,B — Strong,Remittance Payments,USA,Yes,Public,Public (NYSE),Public,"NYSE:WU; legacy remittance incumbent, declining digital share",High,100,74,60,80,30,Legacy competitor; senior talent poachable
+Omnio,71.8,B — Strong,Banking Infrastructure,UK,Yes,Private,Private,<$50M,UK/EU banking platform,Low,74,100,52,73,42,UK
+Finix,71.8,B — Strong,Card Payment Processors,USA,,Private,Series C,$250M-1B,US payments infra,Low,78,74,55,88,62,US
+Upstart,71.7,B — Strong,Consumer Credit,USA,,Public,Public (Nasdaq),Public,Nasdaq:UPST; US AI lending,Medium,88,74,55,70,58,US AI-credit talent
+Signzy,71.6,B — Strong,Banking Infrastructure,India,,Private,Series B,$50-250M,India KYC/onboarding infra,Low,74,80,52,86,62,India corridor
+Chip,71.6,B — Strong,Savings / Investments / Wealth,Ireland,Yes,Private,Series B,$50-250M,UK/Ireland savings+investing app,Medium,86,62,62,86,62,UK; savings overlap
+EQ Bank,71.4,B — Strong,Neobanks,Canada,,Subsidiary,Public parent (TSX),Public,Equitable Bank digital arm; Canada,Low,90,70,60,70,55,Diaspora destination
+TransUnion,71.3,B — Strong,Consumer Credit,USA,Yes,Public,Public (NYSE),Public,NYSE:TRU; global credit bureau,High,88,74,58,75,50,Credit-data talent
+N26,71.3,B — Strong,Neobanks,"Germany, Spain",Yes,Private,Series E,$1-10B,Germany neobank ~$9B peak; growth caps lifted 2024,Medium,90,55,70,80,62,EU talent
+OneCard,71.3,B — Strong,Credit Cards,India,,Private,Late/Growth,$1-10B,India mobile credit-card unicorn,Medium,74,80,58,76,62,India corridor
+NayaPay,71.3,B — Strong,Neobanks,Pakistan,,Private,Seed,<$50M,Pakistan payments/neobank,Low,90,78,58,58,52,Pakistan corridor
+Bank Zero,71.3,B — Strong,Neobanks,South Africa,Yes,Private,Private/founder,<$50M,SA mutual-style digital bank,Low,90,80,52,67,48,SA market
+InsuranceDekho,71.3,B — Strong,Insurtech,India,,Private,Series B,$250M-1B,India insurance distribution; ~$0.65B,Medium,70,80,50,86,68,India market
+Cashew,71.3,B — Strong,Consumer Credit,UAE,,Private,Series A,<$50M,UAE BNPL,Low,88,76,52,70,55,Gulf
+Alan,71.2,B — Strong,Insurtech,USA,Yes,Private,Series F,$1-10B,French health-insurance neobank ~$4B; multi-product health,Medium,70,74,62,78,72,Multi-product model
+Tarabut,71.1,B — Strong,Open Banking,UAE,,Private,Series A,$50-250M,Saudi/MENA open-banking leader,Medium,72,76,65,70,68,Gulf; OB infra
+Trade Republic,71,B — Strong,Savings / Investments / Wealth,Germany,,Private,Late/Growth,$1-10B,Germany neobroker ~$5B+; banking push; profitable,High,86,52,65,76,78,Investments->banking; multi-product
+Adumo,71,B — Strong,Card Payment Processors,Kenya,Yes,Subsidiary,Acquired (Lesaka),n/a,"SA/African payments, Lesaka-owned",Low,78,82,55,78,52,African market
+Borrowell,70.9,B — Strong,Consumer Credit,Canada,,Private,Series B,$50-250M,Canada credit/lending marketplace,Low,88,70,52,91,48,Diaspora destination
+KalPay,70.8,B — Strong,Consumer Credit,Pakistan,,Private,Seed,<$50M,Pakistan BNPL,Low,88,78,55,58,55,Pakistan corridor
+Sumeria (Lydia),70.8,B — Strong,Neobanks,France,,Private,Series C,$250M-1B,France P2P->neobank pivot; rebranded Sumeria,Medium,90,52,62,88,65,
+Postpay,70.7,B — Strong,Consumer Credit,UAE,,Private,Series A,<$50M,UAE BNPL,Low,88,76,52,70,52,Gulf
+ManyPets,70.7,B — Strong,Insurtech,UK,,Private,Late/Growth,$1-10B,UK pet insurance unicorn; post-peak retrench,Medium,70,100,42,81,45,UK talent
+Ziina,70.7,B — Strong,Card Payment Processors,UAE,,Private,Series A,<$50M,UAE P2P/SMB payments; YC,Low,78,76,55,70,65,Gulf
+Urban Jungle,70.5,B — Strong,Insurtech,UK,,Private,Series A,<$50M,UK home/contents insurance,Low,70,100,45,75,45,UK talent
+Setu,70.4,B — Strong,Banking Infrastructure,India,,Subsidiary,Acquired (Pine Labs),n/a,"India API infra, Pine Labs-owned",Low,74,80,55,78,58,India corridor
+Cardless,70.3,B — Strong,Credit Cards,USA,,Private,Series C,$250M-1B,US co-brand credit-card infra,Low,74,74,55,88,60,US
+Mahaana,70.3,B — Strong,Savings / Investments / Wealth,Pakistan,,Private,Seed,<$50M,Pakistan digital wealth,Low,86,78,55,58,55,Pakistan corridor
+Payhawk,70.2,B — Strong,Expensing / Payroll Payments,UK,Yes,Private,Series B,$1-10B,UK/Bulgaria spend-management unicorn ~$1B,Medium,52,100,48,86,62,UK talent
+PingPong,70.2,B — Strong,Payment Infrastructure,China,,Private,Private/Growth,$1-10B,China cross-border payments for merchants; profitable,Medium,95,42,72,74,70,Cross-border corridors
+WeBank,70.2,B — Strong,Neobanks,China,,Subsidiary,Tencent-backed,$10B+,~470m customers; world's largest digital bank; China,Medium,90,42,85,66,72,AI credit-scoring leader
+Cuvva,69.9,B — Strong,Insurtech,UK,,Private,Series A,<$50M,UK flexible car insurance; slow growth,Low,70,100,45,75,42,UK talent
+Onsurity,69.9,B — Strong,Insurtech,India,,Private,Series B,$50-250M,India SME health benefits,Low,70,80,48,86,62,India market
+QisstPay,69.8,B — Strong,Consumer Credit,Pakistan,,Private,Seed,<$50M,Pakistan BNPL,Low,88,78,52,58,52,Pakistan corridor
+Yubi,69.8,B — Strong,Business Lending,India,,Private,Series B,$1-10B,India debt-marketplace unicorn ~$1.5B,Medium,64,80,55,86,65,India corridor
+Satispay,69.6,B — Strong,Payment Infrastructure,Italy,,Private,Series D,$1-10B,Italy payments unicorn,Medium,95,50,55,84,62,
+LendingClub,69.5,B — Strong,Consumer Credit,USA,,Public,Public (NYSE),Public,US consumer lending/bank,Medium,88,74,52,75,45,US
+Network International,69.4,B — Strong,Card Payment Processors,UAE,,Private,PE (Brookfield),$1-10B,MENA payments; taken private ~$2.7B,Medium,78,76,60,75,50,MENA/Africa rails
+Alipay,69.3,B — Strong,Superapps,China,Yes,Subsidiary,Ant Group,$10B+,China superapp (Ant); ~1B+ users,Medium,82,42,92,72,70,Superapp model; talent less accessible
+Helcim,69.3,B — Strong,Card Payment Processors,Canada,,Private,Series B,$50-250M,Canada SMB payments,Low,78,70,52,86,58,
+Funding Circle,69.2,B — Strong,Business Lending,"UK, USA",Yes,Public,Public (LSE),Public,LSE:FCH; UK/US SME lending,Medium,64,100,48,75,45,UK talent
+Magnati,69.2,B — Strong,Card Payment Processors,UAE,,Subsidiary,Bank-owned,n/a,UAE payments (FAB),Low,78,76,55,83,48,Gulf
+PayTabs,69.1,B — Strong,Card Payment Processors,UAE,,Private,Private,$50-250M,Saudi/MENA payments,Low,78,76,58,68,55,MENA
+Go Digit,69.1,B — Strong,Insurtech,India,,Public,Public (NSE/BSE),Public,Listed 2024; India general insurer,Medium,70,80,52,70,65,India market
+Pleo,69,B — Strong,Expensing / Payroll Payments,"Sweden, UK",Yes,Private,Late/Growth,$1-10B,Denmark/UK spend management ~$4.7B,Medium,52,100,48,76,62,UK talent
+FlexiLoans,69,B — Strong,Business Lending,India,,Private,Series C,$50-250M,India SME lending,Low,64,80,52,88,62,India corridor
+Ramp,69,B — Strong,Expensing / Payroll Payments,USA,,Private,Late/Growth,$10B+,US spend mgmt ~$22B+; one of fastest-growing ever,High,52,74,55,76,95,"US — elite, hyper-growth talent"
+Vivid Money,69,B — Strong,Neobanks,Germany,,Private,Series C,$250M-1B,Germany/EU money app,Low,90,52,62,88,55,
+Fire (Fire.com),69,B — Strong,Payment Infrastructure,Ireland,,Private,Private,<$50M,Ireland/UK accounts+payments API,Low,95,62,55,73,48,UK/IE
+Ant Group,68.9,B — Strong,Superapps,China,Yes,Private,Late/Growth,$10B+,China fintech giant ~$80B+; superapp infra,Medium,82,42,92,76,65,Multi-product model reference
+DAPI,68.9,B — Strong,Open Banking,UAE,,Private,Series A,<$50M,UAE/MENA open-banking payments API,Low,72,76,60,70,60,Gulf
+Lemonway,68.8,B — Strong,Payment Infrastructure,France,,Private,Series B,$50-250M,France marketplace payments,Low,95,52,55,91,50,
+Scalable Capital,68.7,B — Strong,Savings / Investments / Wealth,Germany,,Private,Series E,$1-10B,Germany neobroker+wealth unicorn,Medium,86,52,62,80,65,Investments overlap
+Galileo Financial Technologies,68.7,B — Strong,Banking Infrastructure,USA,,Subsidiary,SoFi-owned,n/a,"US card/issuing infra, SoFi-owned",Low,74,74,58,78,55,US infra
+PB Fintech (PolicyBazaar),68.7,B — Strong,Insurtech,India,,Public,Public (NSE/BSE),Public,Listed; India's largest insurance marketplace,Medium,70,80,55,70,60,India market
+Deel,68.6,B — Strong,Expensing / Payroll Payments,USA,,Private,Late/Growth,$10B+,US global payroll/EOR ~$12B+; hyper-growth,High,52,74,58,76,90,"Global payroll; hot, scaling fast"
+Numeral,68.5,B — Strong,Payment Infrastructure,France,,Private,Series A,$50-250M,France bank-payment infra,Low,95,52,58,70,60,
+Rippling,68.5,B — Strong,Expensing / Payroll Payments,USA,,Private,Late/Growth,$10B+,US HR/finance/IT platform ~$16.8B; hyper-growth,High,52,74,55,76,92,US — elite talent; multi-product
+Mamo,68.5,B — Strong,Card Payment Processors,UAE,,Private,Series A,<$50M,UAE SMB payments,Low,78,76,52,70,55,Gulf
+Soldo,68.2,B — Strong,Expensing / Payroll Payments,"UK, Italy",,Private,Series C,$250M-1B,UK/Italy spend management,Low,52,100,45,88,52,UK talent
+Sun Finance,68.1,B — Strong,Consumer Credit,Latvia,,Private,Private,$250M-1B,"Latvia EM online lending; profitable, fast",Medium,88,55,55,68,68,EM markets
+Nickel,68.1,B — Strong,Neobanks,France,,Subsidiary,BNP-owned,$1-10B,France mass-market accounts via tobacconists,Low,90,52,58,78,60,Distribution model
+Nuvei,68,B — Strong,Card Payment Processors,Canada,,Private,PE (Advent),$1-10B,Canada payments; taken private 2024 ~$6.3B,Medium,78,70,60,70,55,
+Trulioo,68,B — Strong,Banking Infrastructure,Canada,,Private,Series D,$1-10B,Global identity verification ~$1.75B,Medium,74,70,50,84,60,
+Marqeta,68,B — Strong,Banking Infrastructure,USA,,Public,Public (Nasdaq),Public,Nasdaq:MQ; US card issuing platform,Medium,74,74,60,70,55,US infra talent
+Alma,67.9,C — Watch,Consumer Credit,France,,Private,Series C,$250M-1B,France BNPL ~$0.6B,Medium,88,52,55,88,58,
+Turtlemint,67.9,C — Watch,Insurtech,India,,Private,Series E,$250M-1B,India insurance distribution platform,Low,70,80,48,80,55,India market
+Mogo,67.8,C — Watch,Consumer Credit,Canada,,Public,Public (TSX/Nasdaq),Public,Canada consumer finance,Low,88,70,50,80,40,
+Kuflink,67.8,C — Watch,Business Lending,UK,Yes,Private,Private,<$50M,UK P2P property lending,Low,64,100,42,78,40,UK
+Plum - group health (India),67.6,C — Watch,Insurtech,India,,Private,Series A,$50-250M,India group health benefits,Low,70,80,48,70,60,India market
+Indifi,67.5,C — Watch,Business Lending,India,,Private,Series D,$50-250M,India SME lending,Low,64,80,50,84,58,India corridor
+Scalapay,67.2,C — Watch,Consumer Credit,Italy,,Private,Series B,$1-10B,Italy BNPL unicorn,Medium,88,50,55,86,58,
+Lightspeed,67,C — Watch,Card Payment Processors,Canada,,Public,Public (NYSE/TSX),Public,Commerce+payments platform,Medium,78,70,55,75,50,
+WeChat Pay (Tenpay),66.9,C — Watch,Superapps,China,,Subsidiary,Tencent,$10B+,China payments superapp (Tencent),Low,82,42,88,72,60,Superapp model reference
+MX,66.9,C — Watch,Open Banking,USA,,Private,Late/Growth,$1-10B,US financial-data/OB ~$1.9B,Medium,72,74,55,76,52,US
+Swan,66.7,C — Watch,Banking Infrastructure,France,,Private,Series B,$50-250M,France embedded banking/BaaS; expanding EU,Medium,74,52,58,86,72,
+Raisin,66.7,C — Watch,Savings / Investments / Wealth,Germany,,Private,Late/Growth,$1-10B,Germany savings marketplace unicorn,Medium,86,52,58,76,60,Savings product overlap
+Vipps MobilePay,66.6,C — Watch,Payment Infrastructure,Norway,,Private,JV (Nordic banks),$1-10B,Nordic mobile payments leader,Low,95,50,58,66,55,
+Tomorrow,66.5,C — Watch,Neobanks,Germany,,Private,Series B,<$50M,Germany sustainable neobank,Low,90,52,55,91,45,
+Mintos,66.5,C — Watch,Savings / Investments / Wealth,Latvia,Yes,Private,Series A,$50-250M,Latvia retail investing/lending marketplace,Low,86,55,58,70,58,Investments overlap
+Lianlian Global,66.4,C — Watch,Payment Infrastructure,China,,Public,Public (HK),Public,China cross-border payments; listed,Medium,95,42,68,70,55,Cross-border corridors
+Coalition,66.4,C — Watch,Insurtech,USA,,Private,Series F,$1-10B,US cyber insurance unicorn ~$5B,Medium,70,74,42,78,62,
+Lendingkart,66.3,C — Watch,Business Lending,India,,Private,Late/Growth,$250M-1B,India SME lending,Low,64,80,52,76,55,India corridor
+MyInvestor,66.3,C — Watch,Savings / Investments / Wealth,Spain,,Subsidiary,Bank-backed,$250M-1B,Spain neobroker/neobank (Andbank),Low,86,55,60,66,58,
+Fauree,66.1,C — Watch,Business Lending,Pakistan,,Private,Series A,<$50M,Pakistan supply-chain finance,Low,64,78,55,70,58,Pakistan corridor
+Haball,66.1,C — Watch,Business Lending,Pakistan,,Private,Series A,<$50M,Pakistan B2B payments/finance,Low,64,78,55,70,58,Pakistan corridor
+MYbank,66.1,C — Watch,Neobanks,China,,Subsidiary,Ant-affiliated,$10B+,Ant/Alibaba SME digital bank China,Low,90,42,72,66,60,Model learnings
+Indexa Capital,66,C — Watch,Savings / Investments / Wealth,Spain,,Private,Private/Growth,$50-250M,Spain robo-advisor; profitable,Low,86,55,55,74,55,
+Belvo,65.8,C — Watch,Open Banking,Spain,,Private,Series B,$50-250M,LatAm open-finance API,Medium,72,55,62,86,62,LatAm OB infra
+Eleving Group,65.7,C — Watch,Consumer Credit,Latvia,,Public,Public (Frankfurt),Public,Latvia EM consumer/vehicle finance,Low,88,55,55,75,50,EM markets
+Bluevine,65.7,C — Watch,Business Lending,USA,,Private,Late/Growth,$1-10B,US SMB banking+lending,Medium,64,74,55,76,58,US talent
+Younited,65.4,C — Watch,Consumer Credit,France,,Private,Late/Growth,$250M-1B,France consumer credit unicorn,Medium,88,52,55,76,52,
+Democrance,65.3,C — Watch,Insurtech,UAE,,Private,Series A,<$50M,UAE insurance SaaS for emerging markets,Low,70,76,48,75,50,Gulf/EM corridor
+Jeeves,65.1,C — Watch,Expensing / Payroll Payments,USA,,Private,Series C,$1-10B,US/EM corporate cards+payments unicorn,Medium,52,74,55,88,65,EM exposure (LatAm/Africa)
+Brex,64.9,C — Watch,Expensing / Payroll Payments,USA,,Private,Late/Growth,$1-10B,US corporate cards/spend ~$12B; profitable push,High,52,74,55,76,72,US talent; fintech-grade
+INDEXO,64.8,C — Watch,Savings / Investments / Wealth,Latvia,,Public,Public (Nasdaq Riga),Public,Latvia pensions->bank,Low,86,55,55,75,48,
+Root,64.6,C — Watch,Insurtech,USA,,Public,Public (Nasdaq),Public,Nasdaq:ROOT; US telematics auto insurer; turnaround,Medium,70,74,45,70,55,
+Fintonic,64.6,C — Watch,Savings / Investments / Wealth,Spain,,Private,Late/Growth,$50-250M,Spain finance manager+marketplace,Low,86,55,52,81,45,
+auxmoney,64.5,C — Watch,Consumer Credit,Germany,,Private,Late/Growth,$250M-1B,Germany consumer lending,Low,88,52,50,81,48,
+JD Technology,64.4,C — Watch,Superapps,China,,Subsidiary,JD-affiliated,$10B+,China fintech (JD),Low,82,42,82,66,55,Model reference
+TWINO,64.4,C — Watch,Consumer Credit,Latvia,,Private,Private,$50-250M,Latvia P2P/EM lending,Low,88,55,50,73,48,
+Mambu,64.2,C — Watch,Banking Infrastructure,Germany,,Private,Series E,$1-10B,Germany core-banking SaaS ~$5B,Medium,74,52,58,80,62,Core-banking talent
+4finance,64.2,C — Watch,Consumer Credit,Latvia,,Private,Private,$250M-1B,Latvia/EM consumer lending group,Low,88,55,52,73,45,
+Fintecture,64,C — Watch,Open Banking,France,,Private,Series B,$50-250M,France A2A/open-banking payments,Low,72,52,58,86,60,
+Next Insurance,63.9,C — Watch,Insurtech,USA,,Subsidiary,Acquired (Munich Re),n/a,"US SMB insurance, acquired 2025 ~$2.6B",Medium,70,74,42,83,45,
+FLOA,63.7,C — Watch,Consumer Credit,France,,Subsidiary,BNP-owned,n/a,France BNPL/consumer credit,Low,88,52,50,83,42,
+Addenda,63.5,C — Watch,Insurtech,UAE,,Private,Series A,<$50M,UAE blockchain insurance,Low,70,76,42,75,45,Gulf corridor
+Navan,63.5,C — Watch,Expensing / Payroll Payments,USA,,Private,Late/Growth,$1-10B,US travel+expense ~$9B; IPO-bound,Medium,52,74,48,76,70,US talent
+Alaan,63.3,C — Watch,Expensing / Payroll Payments,UAE,,Private,Series A,$50-250M,UAE spend management; YC; fast-growing,Medium,52,76,48,70,70,Gulf
+Du Xiaoman,63.1,C — Watch,Consumer Credit,China,,Subsidiary,Baidu-affiliated,$10B+,China consumer credit (Baidu),Low,88,42,62,66,55,Model learnings
+Fenergo,63,C — Watch,Banking Infrastructure,Ireland,,Private,PE-backed,$1-10B,Ireland KYC/AML infra ~$1B+,Medium,74,62,48,70,55,
+Volopay,62.9,C — Watch,Expensing / Payroll Payments,India,,Private,Series A,$50-250M,India/SEA spend management,Low,52,80,48,70,62,India/SEA corridor
+Bridge by Bankin',62.9,C — Watch,Open Banking,France,,Private,Series C,$50-250M,France open-banking/payments,Low,72,52,55,88,55,
+Cofidis,62.7,C — Watch,Consumer Credit,France,,Subsidiary,Bank-owned,n/a,France consumer credit (Credit Mutuel),Low,88,52,48,88,35,
+Nordigen,62.5,C — Watch,Open Banking,Latvia,,Subsidiary,Acquired (GoCardless),n/a,"Latvia free OB data, GoCardless-owned",Low,72,55,55,78,55,
+HeavyFinance,61.8,C — Watch,Savings / Investments / Wealth,Lithuania,,Private,Seed,<$50M,Lithuania agri-investing,Low,86,55,48,63,45,
+Float,61.7,C — Watch,Expensing / Payroll Payments,Canada,,Private,Series B,$50-250M,Canada corporate cards/expense,Low,52,70,45,86,62,
+Neonomics,61.6,C — Watch,Open Banking,Norway,,Private,Series B,$50-250M,Norway open-banking payments,Low,72,50,55,86,52,
+Clark,61.4,C — Watch,Insurtech,Germany,,Private,Series D,$250M-1B,German digital insurance broker,Low,70,52,52,84,55,
+Akur8,61.4,C — Watch,Insurtech,France,,Private,Series C,$250M-1B,Insurance pricing AI; ~$120m Series C 2024,Medium,70,52,40,88,62,
+Clearco,61.3,C — Watch,Business Lending,Canada,,Private,Late/Growth,$250M-1B,Canada e-comm financing; post-peak retrench,Medium,64,70,48,81,42,
+Treezor,61.3,C — Watch,Banking Infrastructure,France,,Subsidiary,Societe Generale,n/a,"France BaaS, SG-owned",Low,74,52,55,77,50,
+Coverflex,61.2,C — Watch,Insurtech,Portugal,,Private,Series B,$50-250M,Portugal flexible benefits/comp,Low,70,52,45,86,58,
+Quantfolio,61.1,C — Watch,Savings / Investments / Wealth,Norway,,Private,Private,<$50M,Norway digital advice/B2B wealth,Low,86,50,48,73,42,
+Getsafe,61.1,C — Watch,Insurtech,Germany,,Private,Series B,$50-250M,German neo-insurer,Low,70,52,50,91,50,
+Qashio,60.7,C — Watch,Expensing / Payroll Payments,UAE,,Private,Series A,<$50M,UAE spend management,Low,52,76,45,70,58,Gulf
+Nexi,60.4,C — Watch,Card Payment Processors,Italy,,Public,Public (Euronext),Public,Italy/EU paytech giant,Medium,78,50,55,80,40,
+Silvr,60.2,C — Watch,Business Lending,France,,Private,Series B,$50-250M,France revenue-based financing,Low,64,52,50,86,58,
+Paynt,60.2,C — Watch,Card Payment Processors,Lithuania,,Private,Private,<$50M,Lithuania/UK acquiring,Low,78,55,48,73,42,
+Solaris,60.2,C — Watch,Banking Infrastructure,Germany,,Private,Late/Growth,$250M-1B,Germany BaaS; down-round/restructuring,Medium,74,52,55,86,38,Distress = availability
+Remote,60,C — Watch,Expensing / Payroll Payments,Portugal,,Private,Series C,$1-10B,Portugal/global payroll+EOR unicorn ~$3B,Medium,52,52,55,88,70,Global payroll talent
+Defacto,59.9,C — Watch,Business Lending,France,,Private,Series A,$50-250M,France embedded SME credit,Low,64,52,52,70,65,
+Velmie,59.6,C — Watch,Banking Infrastructure,Lithuania,,Private,Bootstrapped,<$50M,Lithuania banking platform vendor,Low,74,55,48,80,40,
+Descartes Underwriting,59.6,C — Watch,Insurtech,France,,Private,Series B,$250M-1B,Parametric/climate insurance,Low,70,52,38,86,55,
+Shift Technology,59.3,C — Watch,Insurtech,France,,Private,Series D,$250M-1B,Insurance fraud/claims AI; unicorn 2021,Medium,70,52,40,89,50,
+Fabrick,59.3,C — Watch,Open Banking,Italy,,Private,Private,$50-250M,Italy open-finance platform,Low,72,50,55,73,48,
+Lufax,59.2,C — Watch,Consumer Credit,China,,Public,Public (NYSE/HK),Public,China consumer/SME credit; declining,Low,88,42,55,80,30,
+Worldline,59.1,C — Watch,Card Payment Processors,France,,Public,Public (Euronext),Public,France payments giant; turnaround/distress,Medium,78,52,55,80,30,Senior talent poachable
+Two,58.8,C — Watch,Business Lending,Norway,,Private,Series A,$50-250M,Norway B2B BNPL,Low,64,50,52,70,62,
+ottonova,57.9,D — Low,Insurtech,Germany,,Private,Series E,$50-250M,German digital health insurer,Low,70,52,40,85,45,
+wefox,56.9,D — Low,Insurtech,Germany,,Private,Late/Growth,$1-10B,Insurtech; ~$4.5B peak then steep restructuring/down-round,Medium,70,52,50,86,30,Distress = high talent availability
+Credimi,56.4,D — Low,Business Lending,Italy,,Private,Late/Growth,$50-250M,Italy SME financing,Low,64,50,48,81,45,
+Payflow,56.4,D — Low,Expensing / Payroll Payments,Spain,,Private,Series A,$50-250M,Spain/LatAm earned-wage access,Low,52,55,52,70,60,
+Aprila Bank,56,D — Low,Business Lending,Norway,,Private,Private,<$50M,Norway SME bank,Low,64,50,48,73,48,
+Moss,55.8,D — Low,Expensing / Payroll Payments,Germany,,Private,Series C,$250M-1B,Germany spend management,Low,52,52,45,88,55,
+Spendesk,55.4,D — Low,Expensing / Payroll Payments,France,,Private,Late/Growth,$1-10B,France spend-management unicorn,Medium,52,52,48,76,58,
+Cobee,55.1,D — Low,Expensing / Payroll Payments,Spain,,Subsidiary,Acquired (Pluxee),n/a,"Spain benefits, Pluxee-owned",Low,52,55,45,83,50,
+Caary,54.9,D — Low,Expensing / Payroll Payments,Canada,,Private,Seed,<$50M,Canada SMB credit/expense,Low,52,70,42,63,42,
+Mooncard,54.6,D — Low,Expensing / Payroll Payments,France,,Private,Series B,$50-250M,France corporate cards/expense,Low,52,52,42,86,52,
