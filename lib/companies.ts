@@ -6,6 +6,23 @@ interface CompanyRow {
   slug: string;
   name: string;
   sector: string;
+  category: string;
+  tier: string;
+  active_scan: boolean;
+  lemfi_relevance_score: number;
+  priority_score: number | null;
+  category_fit: number | null;
+  market_overlap: number | null;
+  product_adjacency: number | null;
+  talent_poachability: number | null;
+  growth_heat: number | null;
+  main_location: string | null;
+  status: string | null;
+  funding_stage: string | null;
+  valuation_band: string | null;
+  valuation_notes: string | null;
+  data_confidence: string | null;
+  competitive_notes: string | null;
   composite_score: number | null;
   previous_score: number | null;
   layoff_score: number | null;
@@ -26,6 +43,15 @@ interface EventRow {
   source_url: string | null;
   points_contributed: number | null;
 }
+
+const COMPANY_COLUMNS = `
+  slug, name, sector, category, tier, active_scan, lemfi_relevance_score, priority_score,
+  category_fit, market_overlap, product_adjacency, talent_poachability, growth_heat,
+  main_location, status, funding_stage, valuation_band, valuation_notes, data_confidence, competitive_notes,
+  composite_score, previous_score,
+  layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
+  why_summary, sourcing_angle, last_scanned_at
+`;
 
 function toIsoDate(value: string | Date | null): string | null {
   if (!value) return null;
@@ -52,6 +78,11 @@ function toSummary(row: CompanyRow): CompanySummary {
     slug: row.slug,
     name: row.name,
     sector: row.sector as Sector,
+    category: row.category,
+    tier: row.tier,
+    activeScan: row.active_scan,
+    relevanceScore: row.lemfi_relevance_score,
+    priorityScore: row.priority_score,
     compositeScore: row.composite_score,
     previousScore: row.previous_score,
     trend: computeTrend(row.composite_score, row.previous_score),
@@ -62,13 +93,11 @@ function toSummary(row: CompanyRow): CompanySummary {
 }
 
 export async function getAllCompanies(): Promise<CompanySummary[]> {
-  const rows = (await sql`
-    SELECT slug, name, sector, composite_score, previous_score,
-           layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
-           why_summary, sourcing_angle, last_scanned_at
+  const rows = (await sql.query(`
+    SELECT ${COMPANY_COLUMNS}
     FROM companies
-    ORDER BY composite_score DESC NULLS LAST
-  `) as unknown as CompanyRow[];
+    ORDER BY priority_score DESC NULLS LAST
+  `)) as unknown as CompanyRow[];
 
   return rows.map(toSummary);
 }
@@ -81,13 +110,10 @@ export async function getLatestScanTimestamp(): Promise<string | null> {
 }
 
 export async function getCompanyBySlug(slug: string): Promise<CompanyDetail | null> {
-  const rows = (await sql`
-    SELECT slug, name, sector, composite_score, previous_score,
-           layoff_score, leadership_exit_score, press_score, glassdoor_score, funding_score,
-           why_summary, sourcing_angle, last_scanned_at
-    FROM companies
-    WHERE slug = ${slug}
-  `) as unknown as CompanyRow[];
+  const rows = (await sql.query(
+    `SELECT ${COMPANY_COLUMNS} FROM companies WHERE slug = $1`,
+    [slug]
+  )) as unknown as CompanyRow[];
 
   const row = rows[0];
   if (!row) return null;
@@ -113,5 +139,19 @@ export async function getCompanyBySlug(slug: string): Promise<CompanyDetail | nu
     ...toSummary(row),
     sourcingAngle: row.sourcing_angle,
     events,
+    relevanceFactors: {
+      categoryFit: row.category_fit,
+      marketOverlap: row.market_overlap,
+      productAdjacency: row.product_adjacency,
+      talentPoachability: row.talent_poachability,
+      growthHeat: row.growth_heat,
+    },
+    mainLocation: row.main_location,
+    status: row.status,
+    fundingStage: row.funding_stage,
+    valuationBand: row.valuation_band,
+    valuationNotes: row.valuation_notes,
+    dataConfidence: row.data_confidence,
+    competitiveNotes: row.competitive_notes,
   };
 }

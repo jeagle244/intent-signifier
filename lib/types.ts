@@ -40,10 +40,23 @@ export interface CompanyEvent {
   pointsContributed: number | null;
 }
 
+export interface RelevanceFactorScores {
+  categoryFit: number | null;
+  marketOverlap: number | null;
+  productAdjacency: number | null;
+  talentPoachability: number | null;
+  growthHeat: number | null;
+}
+
 export interface CompanySummary {
   slug: string;
   name: string;
   sector: Sector;
+  category: string;
+  tier: string;
+  activeScan: boolean;
+  relevanceScore: number;
+  priorityScore: number | null;
   compositeScore: number | null;
   previousScore: number | null;
   trend: Trend;
@@ -55,4 +68,12 @@ export interface CompanySummary {
 export interface CompanyDetail extends CompanySummary {
   sourcingAngle: string | null;
   events: CompanyEvent[];
+  relevanceFactors: RelevanceFactorScores;
+  mainLocation: string | null;
+  status: string | null;
+  fundingStage: string | null;
+  valuationBand: string | null;
+  valuationNotes: string | null;
+  dataConfidence: string | null;
+  competitiveNotes: string | null;
 }

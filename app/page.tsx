@@ -28,8 +28,9 @@ export default async function HomePage() {
           Who to <span className="highlight-mark">source this week</span>
         </h1>
         <p className="text-ink/60 max-w-2xl mb-8">
-          Ranked by Move Likelihood Score — public signals on layoffs, leadership churn, negative
-          press, Glassdoor sentiment, and funding distress across our target companies.
+          Ranked by Priority Score — half LemFi Relevance (how strategically worth targeting a
+          company is) and half Move Likelihood (public signals on layoffs, leadership churn,
+          negative press, Glassdoor sentiment, and funding distress).
         </p>
 
         <LeagueTable companies={companies} />

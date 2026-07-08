@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { getCompanyBySlug } from "@/lib/companies";
 import { Logo } from "@/components/ui/Logo";
 import { ScoreBadge } from "@/components/league-table/ScoreBadge";
+import { TierBadge } from "@/components/league-table/TierBadge";
 import { TrendArrow } from "@/components/league-table/TrendArrow";
+import { RelevanceBreakdown } from "@/components/company-detail/RelevanceBreakdown";
 import { SubScoreBreakdown } from "@/components/company-detail/SubScoreBreakdown";
 import { EventTimeline } from "@/components/company-detail/EventTimeline";
 import { SourcingAngleCard } from "@/components/company-detail/SourcingAngleCard";
@@ -45,9 +47,22 @@ export default async function CompanyDetailPage({
             <p className="eyebrow mb-1">{SECTOR_LABEL[company.sector] ?? company.sector}</p>
             <h1 className="text-4xl font-bold">{company.name}</h1>
           </div>
-          <div className="flex items-center gap-3">
-            <TrendArrow trend={company.trend} />
-            <ScoreBadge score={company.compositeScore} size="md" />
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] uppercase tracking-wide text-ink/40 font-bold">Priority</span>
+              <ScoreBadge score={company.priorityScore} size="md" />
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] uppercase tracking-wide text-ink/40 font-bold">Intent</span>
+              <div className="flex items-center gap-1">
+                <TrendArrow trend={company.trend} />
+                <ScoreBadge score={company.compositeScore} size="sm" />
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] uppercase tracking-wide text-ink/40 font-bold">Tier</span>
+              <TierBadge tier={company.tier} />
+            </div>
           </div>
         </div>
 
@@ -67,6 +82,18 @@ export default async function CompanyDetailPage({
 
         <div className="flex flex-col gap-5">
           <SourcingAngleCard angle={company.sourcingAngle} />
+          <RelevanceBreakdown
+            tier={company.tier}
+            category={company.category}
+            relevanceScore={company.relevanceScore}
+            factors={company.relevanceFactors}
+            mainLocation={company.mainLocation}
+            status={company.status}
+            fundingStage={company.fundingStage}
+            valuationBand={company.valuationBand}
+            valuationNotes={company.valuationNotes}
+            competitiveNotes={company.competitiveNotes}
+          />
           <SubScoreBreakdown subScores={company.subScores} />
           <EventTimeline events={company.events} />
         </div>

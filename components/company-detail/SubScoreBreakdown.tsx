@@ -20,7 +20,7 @@ export function SubScoreBreakdown({ subScores }: { subScores: SubScores }) {
 
   return (
     <Card className="p-5">
-      <h2 className="font-bold text-lg mb-4">Sub-score breakdown</h2>
+      <h2 className="font-bold text-lg mb-4">Intent sub-score breakdown</h2>
       <div className="flex flex-col gap-3">
         {rows.map((row) => (
           <div key={row.key}>

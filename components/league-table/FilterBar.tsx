@@ -20,10 +20,19 @@ const SIGNALS: { value: SignalCategory | "all"; label: string }[] = [
   { value: "fundingDistress", label: "Funding distress" },
 ];
 
+const TIERS: { value: string; label: string }[] = [
+  { value: "all", label: "All tiers" },
+  { value: "A — Priority", label: "Tier A — Priority" },
+  { value: "B — Strong", label: "Tier B — Strong" },
+  { value: "C — Watch", label: "Tier C — Watch" },
+  { value: "D — Low", label: "Tier D — Low" },
+];
+
 export interface FilterState {
   search: string;
   sector: Sector | "all";
   signal: SignalCategory | "all";
+  tier: string;
   minScore: number;
 }
 
@@ -52,6 +61,18 @@ export function FilterBar({
         {SECTORS.map((s) => (
           <option key={s.value} value={s.value}>
             {s.label}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={filters.tier}
+        onChange={(e) => onChange({ ...filters, tier: e.target.value })}
+        className="hard-border rounded-lg px-3 py-2 text-sm bg-white"
+      >
+        {TIERS.map((t) => (
+          <option key={t.value} value={t.value}>
+            {t.label}
           </option>
         ))}
       </select>
@@ -87,5 +108,6 @@ export const DEFAULT_FILTERS: FilterState = {
   search: "",
   sector: "all",
   signal: "all",
+  tier: "all",
   minScore: 0,
 };

@@ -4,10 +4,11 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { CompanySummary } from "@/lib/types";
 import { ScoreBadge } from "./ScoreBadge";
+import { TierBadge } from "./TierBadge";
 import { TrendArrow } from "./TrendArrow";
 import { DEFAULT_FILTERS, FilterBar, FilterState } from "./FilterBar";
 
-type SortKey = "rank" | "name" | "score" | "sector";
+type SortKey = "rank" | "name" | "priority" | "intent" | "relevance" | "sector";
 type SortDir = "asc" | "desc";
 
 const SECTOR_LABEL: Record<string, string> = {
@@ -22,15 +23,16 @@ const SECTOR_LABEL: Record<string, string> = {
 
 export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
-  const [sortKey, setSortKey] = useState<SortKey>("score");
+  const [sortKey, setSortKey] = useState<SortKey>("priority");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   const filtered = useMemo(() => {
     return companies.filter((c) => {
       if (filters.search && !c.name.toLowerCase().includes(filters.search.toLowerCase())) return false;
       if (filters.sector !== "all" && c.sector !== filters.sector) return false;
+      if (filters.tier !== "all" && c.tier !== filters.tier) return false;
       if (filters.signal !== "all" && c.subScores[filters.signal] == null) return false;
-      if (filters.minScore > 0 && (c.compositeScore ?? -1) < filters.minScore) return false;
+      if (filters.minScore > 0 && (c.priorityScore ?? -1) < filters.minScore) return false;
       return true;
     });
   }, [companies, filters]);
@@ -41,7 +43,9 @@ export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
       let cmp = 0;
       if (sortKey === "name") cmp = a.name.localeCompare(b.name);
       else if (sortKey === "sector") cmp = a.sector.localeCompare(b.sector);
-      else cmp = (a.compositeScore ?? -1) - (b.compositeScore ?? -1);
+      else if (sortKey === "intent") cmp = (a.compositeScore ?? -1) - (b.compositeScore ?? -1);
+      else if (sortKey === "relevance") cmp = a.relevanceScore - b.relevanceScore;
+      else cmp = (a.priorityScore ?? -1) - (b.priorityScore ?? -1);
       return sortDir === "asc" ? cmp : -cmp;
     });
     return arr;
@@ -73,9 +77,24 @@ export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
               </th>
               <th
                 className="px-4 py-3 font-bold cursor-pointer select-none"
-                onClick={() => toggleSort("score")}
+                onClick={() => toggleSort("relevance")}
+                title="Tier: static business-fit rank (A best, D lowest)"
               >
-                Score {sortKey === "score" && (sortDir === "desc" ? "↓" : "↑")}
+                Tier
+              </th>
+              <th
+                className="px-4 py-3 font-bold cursor-pointer select-none"
+                onClick={() => toggleSort("priority")}
+                title="50% LemFi Relevance + 50% Move Likelihood — this is the default sort"
+              >
+                Priority {sortKey === "priority" && (sortDir === "desc" ? "↓" : "↑")}
+              </th>
+              <th
+                className="px-4 py-3 font-bold cursor-pointer select-none"
+                onClick={() => toggleSort("intent")}
+                title="Move Likelihood Score — dynamic signal from the scan pipeline"
+              >
+                Intent {sortKey === "intent" && (sortDir === "desc" ? "↓" : "↑")}
               </th>
               <th className="px-4 py-3 font-bold">7-day trend</th>
               <th className="px-4 py-3 font-bold">Why</th>
@@ -95,7 +114,13 @@ export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
                   <div className="text-xs text-ink/50">{SECTOR_LABEL[c.sector] ?? c.sector}</div>
                 </td>
                 <td className="px-4 py-3">
-                  <ScoreBadge score={c.compositeScore} />
+                  <TierBadge tier={c.tier} />
+                </td>
+                <td className="px-4 py-3">
+                  <ScoreBadge score={c.priorityScore} />
+                </td>
+                <td className="px-4 py-3">
+                  <ScoreBadge score={c.compositeScore} size="sm" />
                 </td>
                 <td className="px-4 py-3">
                   <TrendArrow trend={c.trend} />
@@ -105,7 +130,7 @@ export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
             ))}
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-ink/50">
+                <td colSpan={7} className="px-4 py-8 text-center text-ink/50">
                   No companies match these filters.
                 </td>
               </tr>
