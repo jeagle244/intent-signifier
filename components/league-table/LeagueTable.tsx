@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { CompanySummary } from "@/lib/types";
+import { matchesLocationBucket } from "@/lib/location-mapping";
 import { ScoreBadge } from "./ScoreBadge";
 import { TierBadge } from "./TierBadge";
 import { TrendArrow } from "./TrendArrow";
@@ -31,6 +32,7 @@ export function LeagueTable({ companies }: { companies: CompanySummary[] }) {
       if (filters.search && !c.name.toLowerCase().includes(filters.search.toLowerCase())) return false;
       if (filters.sector !== "all" && c.sector !== filters.sector) return false;
       if (filters.tier !== "all" && c.tier !== filters.tier) return false;
+      if (filters.location !== "all" && !matchesLocationBucket(c.mainLocation, filters.location)) return false;
       if (filters.signal !== "all" && c.subScores[filters.signal] == null) return false;
       if (filters.minScore > 0 && (c.priorityScore ?? -1) < filters.minScore) return false;
       return true;

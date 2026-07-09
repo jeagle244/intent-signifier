@@ -1,4 +1,5 @@
 import { Sector, SignalCategory } from "@/lib/types";
+import { LocationBucket } from "@/lib/location-mapping";
 
 const SECTORS: { value: Sector | "all"; label: string }[] = [
   { value: "all", label: "All sectors" },
@@ -28,11 +29,21 @@ const TIERS: { value: string; label: string }[] = [
   { value: "D — Low", label: "Tier D — Low" },
 ];
 
+const LOCATIONS: { value: LocationBucket | "all"; label: string }[] = [
+  { value: "all", label: "All locations" },
+  { value: "UK", label: "UK" },
+  { value: "US", label: "US" },
+  { value: "Nigeria", label: "Nigeria" },
+  { value: "Europe", label: "Europe (other)" },
+  { value: "Other", label: "Other" },
+];
+
 export interface FilterState {
   search: string;
   sector: Sector | "all";
   signal: SignalCategory | "all";
   tier: string;
+  location: LocationBucket | "all";
   minScore: number;
 }
 
@@ -78,6 +89,18 @@ export function FilterBar({
       </select>
 
       <select
+        value={filters.location}
+        onChange={(e) => onChange({ ...filters, location: e.target.value as FilterState["location"] })}
+        className="hard-border rounded-lg px-3 py-2 text-sm bg-white"
+      >
+        {LOCATIONS.map((l) => (
+          <option key={l.value} value={l.value}>
+            {l.label}
+          </option>
+        ))}
+      </select>
+
+      <select
         value={filters.signal}
         onChange={(e) => onChange({ ...filters, signal: e.target.value as FilterState["signal"] })}
         className="hard-border rounded-lg px-3 py-2 text-sm bg-white"
@@ -109,5 +132,6 @@ export const DEFAULT_FILTERS: FilterState = {
   sector: "all",
   signal: "all",
   tier: "all",
+  location: "all",
   minScore: 0,
 };

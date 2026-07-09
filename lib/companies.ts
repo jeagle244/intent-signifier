@@ -87,6 +87,7 @@ function toSummary(row: CompanyRow): CompanySummary {
     previousScore: row.previous_score,
     trend: computeTrend(row.composite_score, row.previous_score),
     whySummary: row.why_summary,
+    mainLocation: row.main_location,
     subScores: toSubScores(row),
     lastScannedAt: toIsoDateTime(row.last_scanned_at),
   };
@@ -146,7 +147,6 @@ export async function getCompanyBySlug(slug: string): Promise<CompanyDetail | nu
       talentPoachability: row.talent_poachability,
       growthHeat: row.growth_heat,
     },
-    mainLocation: row.main_location,
     status: row.status,
     fundingStage: row.funding_stage,
     valuationBand: row.valuation_band,

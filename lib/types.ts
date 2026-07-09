@@ -63,13 +63,13 @@ export interface CompanySummary {
   whySummary: string | null;
   subScores: SubScores;
   lastScannedAt: string | null;
+  mainLocation: string | null;
 }
 
 export interface CompanyDetail extends CompanySummary {
   sourcingAngle: string | null;
   events: CompanyEvent[];
   relevanceFactors: RelevanceFactorScores;
-  mainLocation: string | null;
   status: string | null;
   fundingStage: string | null;
   valuationBand: string | null;
